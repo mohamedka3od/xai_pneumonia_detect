@@ -2,13 +2,11 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/modules/register/cubit/states.dart';
-import '../../layout/app_layout.dart';
 import '../../network/local/cache_helper.dart';
 import '../../layout/background.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
-import '../login/login_screen.dart';
 import '../main_screen/main_screen.dart';
 import '../register/cubit/cubit.dart';
 class RegisterScreen extends StatelessWidget {
@@ -192,14 +190,14 @@ class RegisterScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      hDivider(context),
+                      Expanded(child: hDivider(context)),
                       const Text(
                         'OR',
                         style: TextStyle(
                             color: Colors.black45
                         ),
                       ),
-                      hDivider(context),
+                      Expanded(child: hDivider(context)),
                     ],
                   ),
                    SizedBox(

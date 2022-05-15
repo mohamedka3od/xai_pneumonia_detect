@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/states.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
-
-import '../../layout/app_layout.dart';
 import '../../network/local/cache_helper.dart';
 import '../../layout/background.dart';
 import '../../shared/components/components.dart';
@@ -180,14 +178,14 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              hDivider(context),
+                              Expanded(child: hDivider(context)),
                               const Text(
                                 'OR',
                                 style: TextStyle(
                                     color: Colors.white
                                 ),
                               ),
-                              hDivider(context),
+                              Expanded(child: hDivider(context)),
                             ],
                           ),
 
