@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "3790171417",
+    "project_id": "xai-pneumonia-detect",
+    "storage_bucket": "xai-pneumonia-detect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3790171417:android:d367eb9e37ee4700e92988",
+        "android_client_info": {
+          "package_name": "com.example.xai_pneumonia_detect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3790171417-uogpi53s4ta8526d29b0i1cu7360llgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.xai_pneumonia_detect",
+            "certificate_hash": "58aa4bb3a677aca019b0561b3830c26cc5b8017f"
+          }
+        },
+        {
+          "client_id": "3790171417-40rqg4g9r287a08qi6t8cikeia4brsnv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0Orpi3dix9I7u8U3TPHqEQJa3Mpwnn08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3790171417-40rqg4g9r287a08qi6t8cikeia4brsnv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
