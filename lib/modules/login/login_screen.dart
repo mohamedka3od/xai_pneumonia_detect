@@ -7,6 +7,7 @@ import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
 import '../../network/local/cache_helper.dart';
 import '../../layout/background.dart';
 import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
 import '../register/register_screen.dart';
@@ -41,12 +42,14 @@ class LoginScreen extends StatelessWidget {
         {
           CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
             navigateAndFinish(context,  MainScreen());
+            uId = CacheHelper.getData(key: 'uId');
           });
         }
         else if (state is GoogleLoginSuccessState)
         {
           CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
             navigateAndFinish(context,  MainScreen());
+            uId = CacheHelper.getData(key: 'uId');
           });
         }
         },

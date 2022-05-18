@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/models/user_model.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
@@ -35,81 +37,42 @@ class AppCubit extends Cubit<AppStates>{
     });
 
   }
-  ///patient's list
- List patientsInfo=[{
-   'name':'mohamed ali',
-   'condition':'not available yet',
-   'date':'15/5/2022'
- },];
-  void addPatient(){
-  patientsInfo = [
-   {
-     'name':'mohamed ali',
-     'condition':'not available yet',
-     'date':'15/5/2022'
-   },
-   {
-     'name':'Ahmed Mostafa',
-     'condition':'not available yet',
-     'date':'23/5/2022'
-   }
-   ,{
-     'name':'khaled Abd El Rahman ',
-     'condition':'not available yet',
-     'date':'30/3/2022'
-   }
-   ,{
-     'name':'Mohamed Yasser',
-     'condition':'not available yet',
-     'date':'15/6/2022'
-   }
-   ,{
-     'name':'mohamed Mahmoud',
-     'condition':'not available yet',
-     'date':'25/7/2022'
-   },
-   {
-     'name':'Alaa Atef',
-     'condition':'not available yet',
-     'date':'9/8/2022'
-   },
-   {
-     'name':'mohamed ali',
-     'condition':'not available yet',
-     'date':'15/5/2022'
-   },
-   {
-     'name':'Ahmed Mostafa',
-     'condition':'not available yet',
-     'date':'23/5/2022'
-   }
-   ,{
-     'name':'khaled Abd El Rahman ',
-     'condition':'not available yet',
-     'date':'30/3/2022'
-   }
-   ,{
-     'name':'Mohamed Yasser',
-     'condition':'not available yet',
-     'date':'15/6/2022'
-   }
-   ,{
-     'name':'mohamed Mahmoud',
-     'condition':'not available yet',
-     'date':'25/7/2022'
-   },
-   {
-     'name':'Alaa Atef',
-     'condition':'not available yet',
-     'date':'9/8/2022'
-   },
-   {
-     'name':'Ayman Atef',
-     'condition':'not available yet',
-     'date':'9/8/2022'
-   }
- ];
-    emit(NewPatientAddedSuccessState());
+  ///signout
+  Future <void> signOut() async{
+    FirebaseAuth.instance.signOut().then(
+        (value){ emit(USerSignOutSuccessState());}
+    );
+  }
+  ///patients
+  Future createPatient()async{
+    final docPatient = FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc();
+    final patient = PatientModel(
+      id: docPatient.id,
+      name: 'nada zaki',
+      date: DateTime.now(),
+      age: 21,
+      email: 'andaana@gmail.com',
+      gender: 'female',
+      notes: '',
+      phone: '0150866844'
+    );
+    final json = patient.toMap();
+    docPatient.set(json).then((value)
+    {
+      emit(NewPatientCreatedSuccessState());
+    })
+    .catchError((error){
+      emit(NewPatientCreatedErrorState(error.toString()));
+    });
+
+  }
+  Stream<List<PatientModel>> getPatients(){
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients')
+    .snapshots()
+    .map((snapshot) => 
+    snapshot.docs.map(
+            (doc) => PatientModel.fromJson(doc.data())).toList()
+    );
   }
 
 

@@ -14,4 +14,14 @@ class GetUSerErrorState extends AppStates{
 
   GetUSerErrorState(this.error);
 }
+class USerSignOutSuccessState extends AppStates{}
+
 class NewPatientAddedSuccessState extends AppStates{}
+class NewPatientCreatedSuccessState extends AppStates{}
+class NewPatientCreatedErrorState extends AppStates{
+  final String error;
+
+  NewPatientCreatedErrorState(this.error);
+}
+class GetPatientsState extends AppStates{}
+

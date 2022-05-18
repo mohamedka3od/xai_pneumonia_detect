@@ -1,9 +1,7 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/widget/navigation_drawer_widget.dart';
 
 import '../../../../shared/app_cubit/cubit.dart';
@@ -42,18 +40,23 @@ class PatientPage extends StatelessWidget {
               centerTitle: true,
               backgroundColor: HexColor('#0000FF'),
             ),
-            body:Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListView.separated(
-                  itemBuilder: (context,index)=>buildPatientCard(cubit.patientsInfo[index],context),
-                  separatorBuilder: (context,index)=>const SizedBox(
-                    height: 10,
-                  ),
-                  itemCount: cubit.patientsInfo.length
-              ),
+            body: StreamBuilder<List<PatientModel>>(
+              stream: cubit.getPatients(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return const Center(child: Text("we got error"));
+                } else if (snapshot.hasData) {
+                  final patients = snapshot.data!;
+                  return ListView(
+                    children: patients.map(buildPatientCard).toList(),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
-            floatingActionButton: const Floating_butt(
-            ),
+            floatingActionButton: const Floating_butt(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: const BotBar(),

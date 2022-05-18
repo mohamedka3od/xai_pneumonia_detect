@@ -5,6 +5,7 @@ import 'package:xai_pneumonia_detect/modules/register/cubit/states.dart';
 import '../../network/local/cache_helper.dart';
 import '../../layout/background.dart';
 import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
 import '../main_screen/main_screen.dart';
@@ -40,12 +41,14 @@ class RegisterScreen extends StatelessWidget {
           {
             CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
               navigateAndFinish(context,  MainScreen());
+              uId = CacheHelper.getData(key: 'uId');
             });
           }
           else if (state is GoogleRegisterSuccessState)
           {
             CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
               navigateAndFinish(context,  MainScreen());
+              uId = CacheHelper.getData(key: 'uId');
             });
           }
 
