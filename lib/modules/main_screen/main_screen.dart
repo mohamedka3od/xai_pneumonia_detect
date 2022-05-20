@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/appbar_form.dart';
+import 'package:xai_pneumonia_detect/modules/main_screen/module/data/data.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
+import 'module/widget/edit_textfield.dart';
 import 'module/widget/navigation_drawer_widget.dart';
 
 class MainScreen extends StatelessWidget {
@@ -20,49 +22,59 @@ class MainScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = AppCubit.get(context);
         return Scaffold(
-          key: _scaffoldKey,
-          drawer: const NavigationDrawerWidget(),
-          appBar: CustomAppBar(
-            title: 'User Profile',
-            childHeight: _iconSize,
-            firstIcon: IconButton(
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  width: 5.0,
+            key: _scaffoldKey,
+            drawer: const NavigationDrawerWidget(),
+            appBar: CustomAppBar(
+              title: 'User Profile',
+              childHeight: _iconSize,
+              firstIcon: IconButton(
+                icon: const Icon(
+                  Icons.menu,
                   color: Colors.white,
                 ),
+                onPressed: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
               ),
               child: Container(
-                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
                     width: 5.0,
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                 ),
-                child: Icon(
-                  Icons.person,
-                  color: HexColor('#0000FF'),
-                  size: _iconSize,
+                child: Container(
+                  width: 80,
+                  height: 80,
+
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 5.0,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(Pro_Data().image),
+                  ),
                 ),
               ),
             ),
-          ),
-          body: Center(
-            child: MyWidget(),
-          ),
+            body: Center(
+              child: Column(
+                children: [
+                  Edit_Text(data:Pro_Data().id),
+                  SizedBox(height: 15,),
+                  Edit_Text(data:Pro_Data().aga.toString()),
+                  SizedBox(height: 15,),
+                  Edit_Text(data:Pro_Data().email),
+                  SizedBox(height: 15,),
+                  Edit_Text(data:Pro_Data().mobilenum.toString()),
+                ],
+              ),
+            )
         );
       },
     );

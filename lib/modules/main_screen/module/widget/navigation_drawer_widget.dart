@@ -3,13 +3,14 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/page/patients.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/page/important.dart';
-
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/page/settings.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 
 import '../../../../network/local/cache_helper.dart';
 import '../../../../shared/components/components.dart';
 import '../../../login/login_screen.dart';
+import '../data/data.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
@@ -18,11 +19,9 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final name = 'Monkey D Luffy';
-    final email = 'MonkeyDG4@oneP.com';
-    final urlImage =
-        'https://image.winudf.com/v2/image/Y29tLkdoYW54aXMuTW9ua2V5REx1ZmZ5V2FsbHBhcGVySERfc2NyZWVuXzJfMTUyMzg4NTIzNF8wNDg/screen-2.jpg?fakeurl=1&type=.webp';
-
+    final name = Pro_Data().id;
+    final email = Pro_Data().email;
+    final urlImage = Pro_Data().image;
     return Drawer(
       child: Material(
         color: HexColor('#0000FF'),
@@ -41,10 +40,10 @@ class NavigationDrawerWidget extends StatelessWidget {
                   name: name,
                   email: email,
                   onClicked: () => Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainScreen()),
+                    context,
+                    MaterialPageRoute(builder: (context) => MainScreen()),
                         (Route<dynamic> route) => false,
-                      )),
+                  )),
             ),
             Container(
               padding: padding,
@@ -108,7 +107,13 @@ class NavigationDrawerWidget extends StatelessWidget {
           padding: padding.add(const EdgeInsets.symmetric(vertical: 20)),
           child: Row(
             children: [
-              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
+              Container(
+                width: 70,
+                height: 70,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(Pro_Data().image),
+                ),
+              ),
               const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -197,17 +202,16 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateAndFinish(context, ImportantPage());
         break;
       case 2:
-        //setting
+      //setting
         navigateTo(context,  Settings());
         break;
       case 3:
-        AppCubit.get(context).createPatient();
+        AppCubit.get(context).addPatient();
         break;
       case 4:
-        //LOgout Hereeeeeeee
-        CacheHelper.removeData(key: 'uId').then((value) {
+      //LOgout Hereeeeeeee
+        CacheHelper.removeData(key: 'token').then((value) {
           if (value) {
-            AppCubit.get(context).signOut();
             navigateAndFinish(context, LoginScreen());
           }
         });
