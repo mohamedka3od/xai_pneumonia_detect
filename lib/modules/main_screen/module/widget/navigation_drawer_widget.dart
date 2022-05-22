@@ -206,12 +206,13 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateTo(context,  Settings());
         break;
       case 3:
-        AppCubit.get(context).addPatient();
+        AppCubit.get(context).createPatient();
         break;
       case 4:
       //LOgout Hereeeeeeee
-        CacheHelper.removeData(key: 'token').then((value) {
+        CacheHelper.removeData(key: 'uId').then((value) {
           if (value) {
+            AppCubit.get(context).signOut();
             navigateAndFinish(context, LoginScreen());
           }
         });
