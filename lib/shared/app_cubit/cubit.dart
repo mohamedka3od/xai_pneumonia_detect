@@ -5,7 +5,10 @@ import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/models/user_model.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
+
 import '../../network/local/cache_helper.dart';
+
+
 class AppCubit extends Cubit<AppStates>{
   AppCubit(this.isDark) : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
@@ -70,3 +73,7 @@ class AppCubit extends Cubit<AppStates>{
     snapshot.docs.map(
             (doc) => PatientModel.fromJson(doc.data())).toList()
     );
+  }
+
+
+}
