@@ -13,7 +13,6 @@ import 'modules/login_or_register/login_register_screen.dart';
 import 'network/local/cache_helper.dart';
 import 'network/remote/dio_helper.dart';
 import 'on_boarding/on_boarding_screen.dart';
-//وصلت
 void main() {
   BlocOverrides.runZoned(
         () async {
