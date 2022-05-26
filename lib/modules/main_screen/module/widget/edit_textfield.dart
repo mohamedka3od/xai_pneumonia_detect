@@ -1,7 +1,6 @@
-import 'package:advance_text_field/advance_text_field.dart';
 import 'package:flutter/material.dart';
 
-import '../data/data.dart';
+import '../../../../shared/components/custom_advanced_text_field.dart';
 
 
 class Edit_Text extends StatelessWidget {
@@ -15,11 +14,11 @@ class Edit_Text extends StatelessWidget {
         children: <Widget>[
           AdvanceTextField(
             type: AdvanceTextFieldType.EDIT,
-            editLabel: Icon(
+            editLabel: const Icon(
               Icons.edit,
               color: Colors.white,
             ),
-            saveLabel: Icon(
+            saveLabel: const Icon(
               Icons.check,
               color: Colors.white,
             ),

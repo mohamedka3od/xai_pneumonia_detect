@@ -3,7 +3,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/page/patients.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/page/important.dart';
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/page/settings.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 

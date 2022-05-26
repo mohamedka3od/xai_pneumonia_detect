@@ -1,4 +1,3 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/data/data.dart';
@@ -31,7 +30,7 @@ class _Floating_buttState extends State<Floating_butt> {
           showModalBottomSheet<void>(
             context: context,
             isScrollControlled: true,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(40),
               ),

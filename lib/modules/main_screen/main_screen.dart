@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/appbar_form.dart';
 import 'package:xai_pneumonia_detect/modules/main_screen/module/data/data.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
@@ -62,19 +61,22 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: Center(
-              child: Column(
-                children: [
-                  Edit_Text(data:Pro_Data().id),
-                  SizedBox(height: 15,),
-                  Edit_Text(data:Pro_Data().aga.toString()),
-                  SizedBox(height: 15,),
-                  Edit_Text(data:Pro_Data().email),
-                  SizedBox(height: 15,),
-                  Edit_Text(data:Pro_Data().mobilenum.toString()),
-                ],
+            body: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Edit_Text(data:Pro_Data().id),
+                      const SizedBox(height: 15,),
+                      Edit_Text(data:Pro_Data().aga.toString()),
+                      const SizedBox(height: 15,),
+                      Edit_Text(data:Pro_Data().email),
+                      const SizedBox(height: 15,),
+                      Edit_Text(data:Pro_Data().mobilenum.toString()),
+                    ],
+                  ),
+                ),
               ),
-            )
+
         );
       },
     );
