@@ -1,14 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
+
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/bloc_observer.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 import 'package:xai_pneumonia_detect/shared/style/themes.dart';
 
-import 'layout/app_layout.dart';
+
+import 'modules/app_screens/module/page/profile.dart';
 import 'modules/login_or_register/login_register_screen.dart';
 import 'network/local/cache_helper.dart';
 import 'network/remote/dio_helper.dart';

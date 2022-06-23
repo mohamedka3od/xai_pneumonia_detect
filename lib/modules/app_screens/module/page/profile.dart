@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/appbar_form.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/data/data.dart';
+import 'package:xai_pneumonia_detect/shared/components/appbar_form.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
-import 'module/widget/edit_textfield.dart';
-import 'module/widget/navigation_drawer_widget.dart';
+import '../../../../shared/components/edit_textfield.dart';
+import '../../../../shared/components/navigation_drawer_widget.dart';
+import '../data/data.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
@@ -65,13 +65,13 @@ class MainScreen extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      Edit_Text(data:Pro_Data().id),
+                      EditText(data:Pro_Data().id),
                       const SizedBox(height: 15,),
-                      Edit_Text(data:Pro_Data().aga.toString()),
+                      EditText(data:Pro_Data().aga.toString()),
                       const SizedBox(height: 15,),
-                      Edit_Text(data:Pro_Data().email),
+                      EditText(data:Pro_Data().email),
                       const SizedBox(height: 15,),
-                      Edit_Text(data:Pro_Data().mobilenum.toString()),
+                      EditText(data:Pro_Data().mobilenum.toString()),
                     ],
                   ),
                 ),

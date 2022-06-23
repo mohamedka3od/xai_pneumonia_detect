@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/states.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
 import '../../network/local/cache_helper.dart';
 import '../../layout/background.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
+import '../app_screens/module/page/profile.dart';
 import '../register/register_screen.dart';
 
 

@@ -27,6 +27,7 @@ Widget defaultFormField({
   IconData? suffix,
   Function? suffixPressed,
   Function()? onTap,
+  bool isautofocus = false,
 }) =>
     Material(
       color: Colors.transparent,
@@ -38,6 +39,7 @@ Widget defaultFormField({
         textAlignVertical: TextAlignVertical.center,
         keyboardType: type,
         obscureText: isPassword,
+        autofocus:  isautofocus,
         onFieldSubmitted: onSubmit,
         onTap: onTap,
         validator: validate,

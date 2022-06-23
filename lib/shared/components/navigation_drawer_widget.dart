@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/page/patients.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/page/important.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/page/settings.dart';
+
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 
-import '../../../../network/local/cache_helper.dart';
-import '../../../../shared/components/components.dart';
-import '../../../login/login_screen.dart';
-import '../data/data.dart';
+import '../../modules/app_screens/module/data/data.dart';
+import '../../modules/app_screens/module/page/important.dart';
+import '../../modules/app_screens/module/page/patients.dart';
+import '../../modules/app_screens/module/page/profile.dart';
+import '../../modules/app_screens/module/page/settings.dart';
+import '../../network/local/cache_helper.dart';
+import 'components.dart';
+import '../../modules/login/login_screen.dart';
+
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
@@ -110,7 +112,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                 width: 70,
                 height: 70,
                 child: CircleAvatar(
-                  backgroundImage: AssetImage(Pro_Data().image),
+
+                  foregroundImage: AssetImage(Pro_Data().image),
+                  //child: Image.asset(Pro_Data().image),
                 ),
               ),
               const SizedBox(width: 20),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/components/custom_advanced_text_field.dart';
+import 'custom_advanced_text_field.dart';
 
 
-class Edit_Text extends StatelessWidget {
-  const Edit_Text({Key? key, required this.data}) : super(key: key);
+class EditText extends StatelessWidget {
+  const EditText({Key? key, required this.data}) : super(key: key);
   final String data;
   @override
   Widget build(BuildContext context) {

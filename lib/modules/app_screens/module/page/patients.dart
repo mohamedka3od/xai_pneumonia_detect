@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/widget/navigation_drawer_widget.dart';
-
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/bottom_appbar_sheet.dart';
+import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
+import 'package:flutter/services.dart';
 import '../../../../shared/app_cubit/cubit.dart';
 import '../../../../shared/app_cubit/states.dart';
 import '../../../../shared/components/build_patient_card.dart';
-import '../botton_appbar.dart';
+
 
 class PatientPage extends StatelessWidget {
   PatientPage({Key? key}) : super(key: key);
@@ -24,6 +26,15 @@ class PatientPage extends StatelessWidget {
             key: _scaffoldKey,
             drawer: const NavigationDrawerWidget(),
             appBar: AppBar(
+              systemOverlayStyle:  SystemUiOverlayStyle(
+                // Status bar color
+                statusBarColor: HexColor('#0000FF'),
+
+                // Status bar brightness (optional)
+                statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+                statusBarBrightness: Brightness.light, // For iOS (dark icons)
+
+              ),
               leading: IconButton(
                 icon: const Icon(
                   Icons.menu,

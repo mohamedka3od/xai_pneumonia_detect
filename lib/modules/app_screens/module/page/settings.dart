@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/widget/navigation_drawer_widget.dart';
+import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
 
 class Settings extends StatelessWidget {
   Settings({Key? key}) : super(key: key);

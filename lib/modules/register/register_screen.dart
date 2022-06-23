@@ -8,7 +8,7 @@ import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
-import '../main_screen/main_screen.dart';
+import '../app_screens/module/page/profile.dart';
 import '../register/cubit/cubit.dart';
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({Key? key}) : super(key: key);
