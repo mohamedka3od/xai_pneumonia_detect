@@ -22,6 +22,10 @@ Widget defaultFormField({
   required FormFieldValidator validate,
   required String label,
   required IconData prefix,
+  Color borderColor = Colors.black,
+  Color iconColor = Colors.black38,
+  Color labelColor = Colors.black38,
+  double elevation = 0,
   bool isPassword = false,
   Function(String)? onSubmit,
   IconData? suffix,
@@ -32,9 +36,8 @@ Widget defaultFormField({
     Material(
       color: Colors.transparent,
       borderRadius: const BorderRadius.all(Radius.circular(28)),
-      elevation: 5,
+      elevation: elevation,
       child: TextFormField(
-
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
         keyboardType: type,
@@ -44,6 +47,13 @@ Widget defaultFormField({
         onTap: onTap,
         validator: validate,
         decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide(
+              color: borderColor,
+              width: 2.0,
+            ),
+          ),
           contentPadding: const EdgeInsets.symmetric(vertical: 5),
           errorStyle: const TextStyle(
             // fontSize: 9,
@@ -57,8 +67,11 @@ Widget defaultFormField({
           ),
           // labelText: label,
           hintText: label,
+
+          hintStyle:TextStyle(color: labelColor),
           prefixIcon: Icon(
             prefix,
+            color:iconColor,
           ),
           suffixIcon: suffix != null
               ? IconButton(
@@ -69,6 +82,7 @@ Widget defaultFormField({
                 )
               : null,
         ),
+
       ),
     );
 ////////////////////////////////////////////////////

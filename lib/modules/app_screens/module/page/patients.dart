@@ -5,7 +5,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/bottom_appbar_sheet.dart';
 import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
-import 'package:flutter/services.dart';
 import '../../../../shared/app_cubit/cubit.dart';
 import '../../../../shared/app_cubit/states.dart';
 import '../../../../shared/components/build_patient_card.dart';
