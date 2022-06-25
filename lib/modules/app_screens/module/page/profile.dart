@@ -1,8 +1,10 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/shared/components/appbar_form.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
+import '../../../../shared/components/constants.dart';
 import '../../../../shared/components/edit_textfield.dart';
 import '../../../../shared/components/navigation_drawer_widget.dart';
 import '../data/data.dart';
@@ -61,21 +63,24 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: SingleChildScrollView(
+            body: ConditionalBuilder(
+              condition: state is !GetUSerLoadingState ,
+              builder:(context)=>SingleChildScrollView(
                 child: Center(
                   child: Column(
                     children: [
-                      EditText(data:Pro_Data().id),
+                      EditText(data:model.name),
                       const SizedBox(height: 15,),
-                      EditText(data:Pro_Data().aga.toString()),
+                      EditText(data:model.email),
                       const SizedBox(height: 15,),
-                      EditText(data:Pro_Data().email),
-                      const SizedBox(height: 15,),
-                      EditText(data:Pro_Data().mobilenum.toString()),
+                      EditText(data:model.phone),
                     ],
                   ),
                 ),
               ),
+              fallback:(context)=>const Center(child: CircularProgressIndicator(),) ,
+            ),
+
 
         );
       },

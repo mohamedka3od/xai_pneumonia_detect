@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'custom_advanced_text_field.dart';
 
 
 class EditText extends StatelessWidget {
   const EditText({Key? key, required this.data}) : super(key: key);
-  final String data;
+  final String? data;
   @override
   Widget build(BuildContext context) {
 
@@ -22,11 +21,11 @@ class EditText extends StatelessWidget {
               Icons.check,
               color: Colors.white,
             ),
-            text: data,
+            text: data!,
             textHint: "None",
             onEditTap: () {},
             onSaveTap: (text) {
-             text = data;
+             text = data!;
             },
           )
         ],

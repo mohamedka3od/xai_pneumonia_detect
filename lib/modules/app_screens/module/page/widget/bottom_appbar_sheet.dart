@@ -1,7 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -9,18 +6,17 @@ import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/imag
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
 
-class Floating_butt extends StatefulWidget {
-  const Floating_butt({
+class FloatingButt extends StatefulWidget {
+  const FloatingButt({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<Floating_butt> createState() => _Floating_buttState();
+  State<FloatingButt> createState() => _FloatingButtState();
 }
 
-class _Floating_buttState extends State<Floating_butt> {
-  final RoundedLoadingButtonController _btnController =
-      RoundedLoadingButtonController();
+class _FloatingButtState extends State<FloatingButt> {
+  final RoundedLoadingButtonController _btnController = RoundedLoadingButtonController();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final ageController = TextEditingController();

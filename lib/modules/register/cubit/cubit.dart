@@ -7,6 +7,7 @@ import 'package:xai_pneumonia_detect/models/user_model.dart';
 import 'package:xai_pneumonia_detect/modules/register/cubit/states.dart';
 
 import '../../../models/login_model.dart';
+import '../../../shared/components/constants.dart';
 
 
 
@@ -28,14 +29,14 @@ class RegisterCubit extends Cubit<RegisterStates>
         email: email,
         password: password
     ).then((value) {
+      // model = UserModel(email: email, name: name, phone: phone, uId: value.user!.uid);
       userCreate(
           email: email,
           phone: phone,
           name: name,
           uId: value.user!.uid,
       );
-      print(value.user!.email);
-      print(value.user!.uid);
+      emit(RegisterSuccessState());
     }).catchError((error){
       print("registerError :${error.toString()}");
       emit(RegisterErrorState(error.toString()));
@@ -49,7 +50,7 @@ class RegisterCubit extends Cubit<RegisterStates>
     required String name,
     required String uId,
   }){
-    UserModel model = UserModel(
+     model = UserModel(
         email: email,
         name: name,
         phone: phone,
@@ -101,7 +102,7 @@ class RegisterCubit extends Cubit<RegisterStates>
         'uId',
         isEqualTo: _user.uid,
       ).get();
-      emit(GoogleRegisterSuccessState(_user.uid));
+
       final List<DocumentSnapshot> _documentSnapshots = resultQuery.docs;
       if(_documentSnapshots.isEmpty){
         FirebaseFirestore.instance.collection("users").doc(_user.uid).set(
@@ -111,10 +112,21 @@ class RegisterCubit extends Cubit<RegisterStates>
               'phone': _user.phoneNumber,
               'name' : _user.displayName,
             }).then((value){
+          model = UserModel(email: _user.email, name: _user.displayName, phone: _user.phoneNumber, uId: _user.uid);
+
           print('user data saved');
         }).catchError((error){
           print(error);
           emit(GoogleRegisterErrorState(error.toString()));
+        });
+      }
+      else{
+        FirebaseFirestore.instance.collection("users").doc(_user.uid).get().then((value) {
+          model = UserModel.fromJson(value.data());
+          emit(GoogleRegisterSuccessState(_user.uid));
+        }).catchError((error){
+          print(error);
+          emit(GoogleRegisterSuccessState(_user.uid));
         });
       }
     }

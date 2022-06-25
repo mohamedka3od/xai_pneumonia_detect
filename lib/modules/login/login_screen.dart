@@ -48,6 +48,7 @@ class LoginScreen extends StatelessWidget {
         else if (state is GoogleLoginSuccessState)
         {
           CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
+
             navigateAndFinish(context,  MainScreen());
             uId = CacheHelper.getData(key: 'uId');
           });

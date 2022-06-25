@@ -66,7 +66,7 @@ class PatientPage extends StatelessWidget {
                 }
               },
             ),
-            floatingActionButton: const Floating_butt(),
+            floatingActionButton: const FloatingButt(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: const BotBar(),

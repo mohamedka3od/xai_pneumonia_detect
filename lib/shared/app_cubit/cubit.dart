@@ -20,10 +20,9 @@ class AppCubit extends Cubit<AppStates>{
     emit(AppChangeStateMode());
   }
   ///Get User Data from Firestore
-  late UserModel model;
-  void getUserData(){
+  void getUserData() async{
     emit(GetUSerLoadingState());
-    FirebaseFirestore.instance.collection('users').doc(uId)
+    await FirebaseFirestore.instance.collection('users').doc(uId)
         .get()
         .then((value) {
           // print(value.data());
@@ -33,7 +32,6 @@ class AppCubit extends Cubit<AppStates>{
         .catchError((error){
           print(error.toString());
       emit(GetUSerErrorState(error.toString()));
-
     });
 
   }

@@ -29,7 +29,8 @@ class AdvanceTextField extends StatefulWidget {
   final TextInputType keyboardType;
 
   /// Text hint and text of [AdvanceTextField].
-  final String? textHint, text;
+  final String? textHint;
+  final String text;
 
   /// Text editing controller.
   final TextEditingController? controller;
@@ -54,7 +55,7 @@ class AdvanceTextField extends StatefulWidget {
         required this.saveLabel,
         this.keyboardType = TextInputType.text,
         this.textHint,
-        this.text,
+        required this.text,
         this.onEditTap,
         this.onSaveTap,
         this.controller,
@@ -95,9 +96,9 @@ class _AdvanceTextFieldState extends State<AdvanceTextField> {
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _make(widget.type);
-      _editingController.text = widget.text!;
+      _editingController.text = widget.text;
     });
     if (widget.controller != null) _editingController = widget.controller!;
     super.initState();

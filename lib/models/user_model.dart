@@ -1,7 +1,7 @@
 class UserModel{
-  late String name;
-  late String email;
-  late String phone;
+  late String? name;
+  late String? email;
+  late String? phone;
   late String uId;
   UserModel({
     required this.email,
