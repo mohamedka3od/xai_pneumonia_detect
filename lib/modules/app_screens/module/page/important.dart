@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/image_picker.dart';
 import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
 
 import '../../../../shared/app_cubit/cubit.dart';
 import '../../../../shared/app_cubit/states.dart';
-import '../../../../shared/components/components.dart';
 
 class ImportantPage extends StatefulWidget {
   ImportantPage({Key? key}) : super(key: key);
@@ -74,9 +72,9 @@ class _ImportantPageState extends State<ImportantPage> {
   }
 
   void _doSomething() async {
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 1), () {
       _btnController.start();
-      navigateAndFinish(context, ImportantPage());
+      _btnController.stop();
     });
   }
 }

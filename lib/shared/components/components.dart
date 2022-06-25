@@ -22,6 +22,7 @@ Widget defaultFormField({
   required FormFieldValidator validate,
   required String label,
   required IconData prefix,
+  textInputAction = TextInputAction.none,
   Color borderColor = Colors.white,
   Color iconColor = Colors.black38,
   Color labelColor = Colors.black38,
@@ -38,6 +39,7 @@ Widget defaultFormField({
       borderRadius: const BorderRadius.all(Radius.circular(28)),
       elevation: elevation,
       child: TextFormField(
+        textInputAction: textInputAction,
         controller: controller,
         textAlignVertical: TextAlignVertical.center,
         keyboardType: type,

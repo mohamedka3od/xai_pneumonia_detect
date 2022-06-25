@@ -45,11 +45,11 @@ class _ProfileImgPickerState extends State<ProfileImgPicker> {
                    CircularProfileAvatar(
                      '',
                      child:image != null
-                         ?Image.file(image!, fit: BoxFit.cover,): const Icon(Icons.add_a_photo_outlined,color: Colors.white,size: 50,),
+                         ?Image.file(image!, fit: BoxFit.cover,):  Icon(Icons.add_a_photo_outlined,color: HexColor('#0000FF'),size: 50,),
                       radius: 50,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       borderWidth: 5,
-                      borderColor: HexColor('#0000FF'),
+                      borderColor: Colors.blue,
                       elevation: 5.0,
                       foregroundColor: Colors.blue,
                       cacheImage: true,
