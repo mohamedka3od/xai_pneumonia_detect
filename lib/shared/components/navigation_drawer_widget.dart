@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
+import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 
 import '../../modules/app_screens/module/data/data.dart';
 import '../../modules/app_screens/module/page/important.dart';
@@ -20,8 +21,8 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final name = Pro_Data().id;
-    final email = Pro_Data().email;
+    final name = model.name;
+    final email = model.email;
     final urlImage = Pro_Data().image;
     return Drawer(
       child: Material(
@@ -97,9 +98,9 @@ class NavigationDrawerWidget extends StatelessWidget {
   }
 
   Widget buildHeader({
-    required String urlImage,
-    required String name,
-    required String email,
+    required String? urlImage,
+    required String? name,
+    required String? email,
     required VoidCallback onClicked,
   }) =>
       InkWell(
@@ -125,7 +126,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      name,
+                      name!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 20, color: Colors.white),
@@ -135,7 +136,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      email,
+                      email!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 14, color: Colors.white),
@@ -209,7 +210,6 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateTo(context,  Settings());
         break;
       case 3:
-        AppCubit.get(context).createPatient();
         break;
       case 4:
       //LOgout Hereeeeeeee

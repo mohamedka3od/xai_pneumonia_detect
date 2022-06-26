@@ -24,4 +24,5 @@ class NewPatientCreatedErrorState extends AppStates{
   NewPatientCreatedErrorState(this.error);
 }
 class GetPatientsState extends AppStates{}
+class GenderStateChanged extends AppStates{}
 

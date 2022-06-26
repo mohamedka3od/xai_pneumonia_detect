@@ -37,51 +37,49 @@ class _ProfileImgPickerState extends State<ProfileImgPicker> {
 
   @override
   Widget build(BuildContext context) {
-      return Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-                   CircularProfileAvatar(
-                     '',
-                     child:image != null
-                         ?Image.file(image!, fit: BoxFit.cover,):  Icon(Icons.add_a_photo_outlined,color: HexColor('#0000FF'),size: 50,),
-                      radius: 50,
-                      backgroundColor: Colors.white,
-                      borderWidth: 5,
-                      borderColor: Colors.blue,
-                      elevation: 5.0,
-                      foregroundColor: Colors.blue,
-                      cacheImage: true,
-                      imageFit: BoxFit.cover,
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => SimpleDialog(
-                              title: const Text('Pick From'),
-                              children: <Widget>[
-                                SimpleDialogOption(
-                                  onPressed: () {
-                                    pickImage(ImageSource.gallery);
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Gallery'),
-                                ),
-                                SimpleDialogOption(
-                                  onPressed: () {
-                                    pickImage(ImageSource.camera);
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Camera'),
-                                ),
-                              ],
-                            ));
-                      },
-                      // sets on tap
-                      showInitialTextAbovePicture: false, 
-                    ),
-            ],
-          ),
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+                 CircularProfileAvatar(
+                   '',
+                   child:image != null
+                       ?Image.file(image!, fit: BoxFit.cover,):  Icon(Icons.add_a_photo_outlined,color: HexColor('#0000FF'),size: 50,),
+                    radius: 50,
+                    backgroundColor: Colors.white,
+                    borderWidth: 5,
+                    borderColor: Colors.blue,
+                    elevation: 5.0,
+                    foregroundColor: Colors.blue,
+                    cacheImage: true,
+                    imageFit: BoxFit.cover,
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => SimpleDialog(
+                            title: const Text('Pick From'),
+                            children: <Widget>[
+                              SimpleDialogOption(
+                                onPressed: () {
+                                  pickImage(ImageSource.gallery);
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Gallery'),
+                              ),
+                              SimpleDialogOption(
+                                onPressed: () {
+                                  pickImage(ImageSource.camera);
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Camera'),
+                              ),
+                            ],
+                          ));
+                    },
+                    // sets on tap
+                    showInitialTextAbovePicture: false,
+                  ),
+          ],
         ),
       );
   }

@@ -42,17 +42,24 @@ class AppCubit extends Cubit<AppStates>{
     );
   }
   ///patients
-  Future createPatient()async{
+  Future createPatient({
+    required String name,
+    required int age,
+    String? email,
+    String? phone,
+    required String gender,
+    String? notes,
+  })async{
     final docPatient = FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc();
     final patient = PatientModel(
       id: docPatient.id,
-      name: 'nada zaki',
+      name: name,
       date: DateTime.now(),
       age: 21,
-      email: 'andaana@gmail.com',
-      gender: 'female',
-      notes: '',
-      phone: '0150866844'
+      email: email,
+      gender: gender,
+      notes: notes,
+      phone: phone
     );
     final json = patient.toMap();
     docPatient.set(json).then((value)
@@ -62,16 +69,21 @@ class AppCubit extends Cubit<AppStates>{
     .catchError((error){
       emit(NewPatientCreatedErrorState(error.toString()));
     });
+    return patient.id;
 
   }
+  Future deletePatient({required pId}){
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pId).delete();
+  }
   Stream<List<PatientModel>> getPatients(){
-    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients')
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').orderBy('date',descending: true)
     .snapshots()
     .map((snapshot) => 
     snapshot.docs.map(
             (doc) => PatientModel.fromJson(doc.data())).toList()
     );
   }
+
 
 
 }

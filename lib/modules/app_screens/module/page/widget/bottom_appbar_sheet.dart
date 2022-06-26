@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/image_picker.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
+import '../../../../../shared/app_cubit/cubit.dart';
+import '../../../../../shared/app_cubit/states.dart';
 
-class FloatingButt extends StatefulWidget {
-  const FloatingButt({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<FloatingButt> createState() => _FloatingButtState();
-}
-
-class _FloatingButtState extends State<FloatingButt> {
+class FloatingButt extends StatelessWidget {
+  FloatingButt({Key? key}) : super(key: key);
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -21,191 +16,265 @@ class _FloatingButtState extends State<FloatingButt> {
   final phoneController = TextEditingController();
   final genderController = TextEditingController();
   final noteController = TextEditingController();
-  Color color = Colors.grey;
+  final Color color = Colors.grey;
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(1),
-        child: FloatingActionButton(
-          backgroundColor: HexColor('#0000FF'),
-          child: const Icon(Icons.add),
-          onPressed: () {
-            showModalBottomSheet(
-                backgroundColor: Colors.white,
-                context: context,
-                isScrollControlled: true,
-                isDismissible: true,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
+    String lPId;
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) => {},
+      builder: (context, state) {
+        var cubit = AppCubit.get(context);
+        return Padding(
+            padding: const EdgeInsets.all(1),
+            child: FloatingActionButton(
+              backgroundColor: HexColor('#0000FF'),
+              child: const Icon(Icons.add),
+              onPressed: () {
+                showModalBottomSheet(
+                    backgroundColor: Colors.white,
+                    context: context,
+                    isScrollControlled: true,
+                    isDismissible: true,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
                       top: Radius.circular(40),
                     )),
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                builder: (BuildContext context) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Stack(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Column(
+                              Stack(
                                 children: [
-                                  Container(
-                                    height: 76,
-                                    width: MediaQuery.of(context).size.width,
-                                    color: HexColor('#0000FF'),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    child: Padding(
-                                      padding:
-                                      const EdgeInsets.symmetric(horizontal: 8.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            child: MaterialButton(
-                                              elevation: 0,
-                                              hoverColor: Colors.blue,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  const BorderRadius.only(
-                                                      topLeft:
-                                                      Radius.circular(20),
-                                                      bottomLeft:
-                                                      Radius.circular(20)),
-                                                  side: BorderSide(
-                                                      color: HexColor('#0000FF'))),
-                                              onPressed: () {
-                                                if (formKey.currentState!.validate()) {
-                                                  // If the form is valid, display a snackbar. In the real world,
-                                                  // you'd often call a server or save the information in a database.
-                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                    const SnackBar(content: Text('Processing Data')),
-                                                  );
-                                                }
-
-                                              },
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 40.0),
-                                                child: Text(
-                                                  "Add",
-                                                  style: TextStyle(
-                                                      color: HexColor('#0000FF')),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        height: 76,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        color: HexColor('#0000FF'),
+                                      ),
+                                      Container(
+                                        width: double.infinity,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                child: MaterialButton(
+                                                  elevation: 0,
+                                                  hoverColor: Colors.blue,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .only(
+                                                              topLeft: Radius
+                                                                  .circular(20),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      20)),
+                                                      side: BorderSide(
+                                                          color: HexColor(
+                                                              '#0000FF'))),
+                                                  onPressed: () {
+                                                    if (formKey.currentState!
+                                                        .validate()) {
+                                                      cubit
+                                                          .createPatient(
+                                                        name:
+                                                            nameController.text,
+                                                        age: int.parse(
+                                                            ageController.text),
+                                                        gender: genderController
+                                                            .text,
+                                                        email: emailController
+                                                            .text,
+                                                        phone: phoneController
+                                                            .text,
+                                                        notes:
+                                                            noteController.text,
+                                                      )
+                                                          .then((value) {
+                                                        lPId = value.toString();
+                                                        Navigator.pop(context);
+                                                        // If the form is valid, display a snackbar. In the real world,
+                                                        // you'd often call a server or save the information in a database.
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: const Text(
+                                                                'Patient Created'),
+                                                            action:
+                                                                SnackBarAction(
+                                                                    label:
+                                                                        "undo",
+                                                                    onPressed:
+                                                                        () {
+                                                                      cubit.deletePatient(pId: lPId).then(
+                                                                          (value) {
+                                                                        showToast(
+                                                                            text:
+                                                                                'Patient Deleted',
+                                                                            state:
+                                                                                ToastStates.SUCESS);
+                                                                      }).catchError(
+                                                                          (error) {
+                                                                        showToast(
+                                                                            text:
+                                                                                error.toString(),
+                                                                            state: ToastStates.ERROR);
+                                                                      });
+                                                                    }),
+                                                          ),
+                                                        );
+                                                      }).catchError((error) {
+                                                        showToast(
+                                                            text: error
+                                                                .toString(),
+                                                            state: ToastStates
+                                                                .ERROR);
+                                                      });
+                                                    }
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 40.0),
+                                                    child: Text(
+                                                      "Add",
+                                                      style: TextStyle(
+                                                          color: HexColor(
+                                                              '#0000FF')),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: MaterialButton(
-
-                                              elevation: 0,
-                                              hoverElevation: 0,
-                                              focusElevation: 0,
-                                              highlightElevation: 0,
-                                              color: HexColor('#0000FF'),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  const BorderRadius.only(
-                                                      topRight:
-                                                      Radius.circular(20),
-                                                      bottomRight:
-                                                      Radius.circular(20)),
-                                                  side: BorderSide(
-                                                      color: HexColor('#0000FF'))),
-                                              onPressed: () {
-                                                nameController.clear();
-                                                phoneController.clear();
-                                                emailController.clear();
-                                                ageController.clear();
-                                                genderController.clear();
-                                                noteController.clear();
-                                                Navigator.pop(context);
-
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(left: 40.0),
-                                                child: Text(
-                                                  "Cancel",
-                                                  style: TextStyle(
-                                                      color: HexColor('#FFFFFF')),
+                                              Expanded(
+                                                child: MaterialButton(
+                                                  elevation: 0,
+                                                  hoverElevation: 0,
+                                                  focusElevation: 0,
+                                                  highlightElevation: 0,
+                                                  color: HexColor('#0000FF'),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .only(
+                                                              topRight: Radius
+                                                                  .circular(20),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          20)),
+                                                      side: BorderSide(
+                                                          color: HexColor(
+                                                              '#0000FF'))),
+                                                  onPressed: () {
+                                                    nameController.clear();
+                                                    phoneController.clear();
+                                                    emailController.clear();
+                                                    ageController.clear();
+                                                    genderController.clear();
+                                                    noteController.clear();
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 40.0),
+                                                    child: Text(
+                                                      "Cancel",
+                                                      style: TextStyle(
+                                                          color: HexColor(
+                                                              '#FFFFFF')),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  const Text(
-                                    "New Patient",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 8.0,left: 8,bottom: 8),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            width: 1.0,
-                                            color: HexColor('#0000FF'),
+                                            ],
                                           ),
                                         ),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              width: 5.0,
-                                              color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      const Text(
+                                        "New Patient",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 8.0, left: 8, bottom: 8),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                width: 1.0,
+                                                color: HexColor('#0000FF'),
+                                              ),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  width: 5.0,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              width: 110,
+                                              height: 110,
+                                              child: const ProfileImgPicker(),
                                             ),
                                           ),
-                                          width: 110,
-                                          height: 110,
-                                          child: const ProfileImgPicker(),
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                          CustomScrollView(
-                            shrinkWrap: true,
-                            slivers: <Widget>[
-                              SliverPadding(
-                                  padding: EdgeInsets.only(
-                                      bottom:
-                                      MediaQuery.of(context).viewInsets.bottom),
-                                  sliver: SliverList(
-                                      delegate: SliverChildListDelegate(<Widget>[
+                              CustomScrollView(
+                                shrinkWrap: true,
+                                slivers: <Widget>[
+                                  SliverPadding(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      sliver: SliverList(
+                                          delegate:
+                                              SliverChildListDelegate(<Widget>[
                                         Form(
                                           key: formKey,
                                           child: Column(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: defaultFormField(
-                                                  textInputAction: TextInputAction.next,
+                                                  textInputAction:
+                                                      TextInputAction.next,
                                                   elevation: 0,
-                                                  borderColor: HexColor('#0000FF'),
-                                                  iconColor: HexColor('#0080ff'),
-                                                  labelColor: HexColor('#0080ff'),
+                                                  borderColor:
+                                                      HexColor('#0000FF'),
+                                                  iconColor:
+                                                      HexColor('#0080ff'),
+                                                  labelColor:
+                                                      HexColor('#0080ff'),
                                                   controller: nameController,
                                                   type: TextInputType.name,
                                                   validate: (value) {
@@ -219,18 +288,26 @@ class _FloatingButtState extends State<FloatingButt> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: defaultFormField(
-                                                    textInputAction: TextInputAction.next,
+                                                    textInputAction:
+                                                        TextInputAction.next,
                                                     elevation: 0,
-                                                    borderColor: HexColor('#0000FF'),
-                                                    iconColor: HexColor('#0080ff'),
-                                                    labelColor: HexColor('#0080ff'),
+                                                    borderColor:
+                                                        HexColor('#0000FF'),
+                                                    iconColor:
+                                                        HexColor('#0080ff'),
+                                                    labelColor:
+                                                        HexColor('#0080ff'),
                                                     controller: ageController,
                                                     type: TextInputType.number,
                                                     validate: (value) {
                                                       if (value!.isEmpty) {
                                                         return 'please enter Patient age';
+                                                      }
+                                                      else if(double.tryParse(value) == null){
+                                                        return 'please enter a valid age';
                                                       }
                                                       return null;
                                                     },
@@ -238,52 +315,72 @@ class _FloatingButtState extends State<FloatingButt> {
                                                     prefix: Icons.date_range),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: defaultFormField(
-                                                    textInputAction: TextInputAction.next,
+                                                    textInputAction:
+                                                        TextInputAction.next,
                                                     elevation: 0,
-                                                    borderColor: HexColor('#0000FF'),
-                                                    iconColor: HexColor('#0080ff'),
-                                                    labelColor: HexColor('#0080ff'),
+                                                    borderColor:
+                                                        HexColor('#0000FF'),
+                                                    iconColor:
+                                                        HexColor('#0080ff'),
+                                                    labelColor:
+                                                        HexColor('#0080ff'),
                                                     controller: emailController,
-                                                    type: TextInputType.emailAddress,
+                                                    type: TextInputType
+                                                        .emailAddress,
                                                     validate: (value) {
-                                                      if (value!.isEmpty) {
-                                                        return 'please enter Patient email address';
-                                                      }
+                                                      // if (value!.isEmpty) {
+                                                      //   return 'please enter Patient email address';
+                                                      // }
                                                       return null;
                                                     },
                                                     label: 'Patient Email',
-                                                    prefix: Icons.email_outlined),
+                                                    prefix:
+                                                        Icons.email_outlined),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: defaultFormField(
-                                                    textInputAction: TextInputAction.next,
+                                                    textInputAction:
+                                                        TextInputAction.next,
                                                     elevation: 0,
-                                                    borderColor: HexColor('#0000FF'),
-                                                    iconColor: HexColor('#0080ff'),
-                                                    labelColor: HexColor('#0080ff'),
+                                                    borderColor:
+                                                        HexColor('#0000FF'),
+                                                    iconColor:
+                                                        HexColor('#0080ff'),
+                                                    labelColor:
+                                                        HexColor('#0080ff'),
                                                     controller: phoneController,
                                                     type: TextInputType.phone,
                                                     validate: (value) {
-                                                      if (value!.isEmpty) {
-                                                        return 'please enter Patient mobile phone';
-                                                      }
+                                                      // if (value!.isEmpty) {
+                                                      //   return 'please enter Patient mobile phone';
+                                                      // }
                                                       return null;
                                                     },
-                                                    label: 'Patient Mobile Phone',
-                                                    prefix: Icons.phone_android_outlined),
+                                                    label:
+                                                        'Patient Mobile Phone',
+                                                    prefix: Icons
+                                                        .phone_android_outlined),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: defaultFormField(
-                                                    textInputAction: TextInputAction.next,
+                                                    textInputAction:
+                                                        TextInputAction.next,
                                                     elevation: 0,
-                                                    borderColor: HexColor('#0000FF'),
-                                                    iconColor: HexColor('#0080ff'),
-                                                    labelColor: HexColor('#0080ff'),
-                                                    controller: genderController,
+                                                    borderColor:
+                                                        HexColor('#0000FF'),
+                                                    iconColor:
+                                                        HexColor('#0080ff'),
+                                                    labelColor:
+                                                        HexColor('#0080ff'),
+                                                    controller:
+                                                        genderController,
                                                     type: TextInputType.text,
                                                     validate: (value) {
                                                       if (value!.isEmpty) {
@@ -292,9 +389,10 @@ class _FloatingButtState extends State<FloatingButt> {
                                                       return null;
                                                     },
                                                     label: 'Patient Gender',
-                                                    prefix:
-                                                    Icons.supervised_user_circle_outlined),
+                                                    prefix: Icons
+                                                        .supervised_user_circle_outlined),
                                               ),
+
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                   top: 8.0,
@@ -304,26 +402,42 @@ class _FloatingButtState extends State<FloatingButt> {
                                                 child: SizedBox(
                                                   height: 100,
                                                   child: TextField(
-                                                    style: TextStyle(color: color),
+                                                    style:
+                                                        TextStyle(color: color),
                                                     decoration: InputDecoration(
                                                       hintText: 'Note',
-                                                      hintStyle:
-                                                      TextStyle(color: HexColor('#0080ff')),
-                                                      prefixIcon: Icon(Icons.info_outline,
-                                                          color: HexColor('#0080ff')),
+                                                      hintStyle: TextStyle(
+                                                          color: HexColor(
+                                                              '#0080ff')),
+                                                      prefixIcon: Icon(
+                                                          Icons.info_outline,
+                                                          color: HexColor(
+                                                              '#0080ff')),
                                                       filled: true,
                                                       fillColor: Colors.white12,
-                                                      enabledBorder: OutlineInputBorder(
-                                                        borderRadius: const BorderRadius.only(
-                                                            topLeft: Radius.circular(15),
-                                                            bottomRight: Radius.circular(15)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        15),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        15)),
                                                         borderSide: BorderSide(
-                                                            color: HexColor('#0000FF')),
+                                                            color: HexColor(
+                                                                '#0000FF')),
                                                       ),
-                                                      focusedBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(5),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
                                                         borderSide: BorderSide(
-                                                            color: HexColor('#0000FF')),
+                                                            color: HexColor(
+                                                                '#0000FF')),
                                                       ),
                                                     ),
                                                     controller: noteController,
@@ -334,15 +448,17 @@ class _FloatingButtState extends State<FloatingButt> {
                                           ),
                                         ),
                                       ])))
+                                ],
+                              ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                });
-          },
-        ));
+                        ),
+                      );
+                    });
+              },
+            ));
+      },
+    );
   }
 }
 

@@ -96,7 +96,7 @@ class _AdvanceTextFieldState extends State<AdvanceTextField> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _make(widget.type);
       _editingController.text = widget.text;
     });
