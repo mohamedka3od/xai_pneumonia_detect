@@ -486,9 +486,9 @@ class BotBar extends StatelessWidget {
               //);
             },
           ),
-          IconButton(
-              icon: const Icon(Icons.upload_rounded, color: Colors.white),
-              onPressed: () {})
+          // IconButton(
+          //     icon: const Icon(Icons.upload_rounded, color: Colors.white),
+          //     onPressed: () {})
         ],
       ),
     );

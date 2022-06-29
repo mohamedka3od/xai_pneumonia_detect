@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/bottom_appbar_sheet.dart';
 import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
+import 'package:xai_pneumonia_detect/shared/style/colors.dart';
 import '../../../../shared/app_cubit/cubit.dart';
 import '../../../../shared/app_cubit/states.dart';
 import '../../../../shared/components/build_patient_card.dart';
@@ -25,31 +25,48 @@ class PatientPage extends StatelessWidget {
             key: _scaffoldKey,
             drawer: const NavigationDrawerWidget(),
             appBar: AppBar(
-              systemOverlayStyle:  SystemUiOverlayStyle(
+              systemOverlayStyle:  const SystemUiOverlayStyle(
                 // Status bar color
-                statusBarColor: HexColor('#0000FF'),
+                statusBarColor: Colors.blueAccent,
 
                 // Status bar brightness (optional)
-                statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+                statusBarIconBrightness: Brightness.light, // For Android (dark icons)
                 statusBarBrightness: Brightness.light, // For iOS (dark icons)
 
               ),
               leading: IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
+                icon: CircleAvatar(
+                  backgroundColor: backGroundColor2,
+                  child: const Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                  ),
                 ),
                 onPressed: () {
                   _scaffoldKey.currentState!.openDrawer();
                 },
               ),
-              title: const Text(
+              actions: [
+                IconButton(
+                  iconSize: 40,
+                    onPressed: (){},
+                    icon: CircleAvatar(
+                    backgroundColor:backGroundColor2,
+                        child: const Icon(
+                          Icons.search_rounded,
+                          color: Colors.white,
+                        )
+                    )
+                )
+              ],
+              title:  Text(
                 'Patients',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: backGroundColor2),
               ),
               centerTitle: true,
-              backgroundColor: HexColor('#0000FF'),
+              backgroundColor: Colors.transparent,
             ),
+            backgroundColor: backGroundColor1,
             body: StreamBuilder<List<PatientModel>>(
               stream: cubit.getPatients(),
               builder: (context, snapshot) {
@@ -58,9 +75,12 @@ class PatientPage extends StatelessWidget {
                   return const Center(child: Text("we got error"));
                 } else if (snapshot.hasData) {
                   final patients = snapshot.data!;
-                  return ListView(
-                    children: patients.map(buildPatientCard).toList(),
+                  return ListView.builder(
+                    // children: patients.map(buildPatientCard).toList(),
+                    itemCount: patients.length,
+                    itemBuilder: (context,index)=> buildPatientCard(context: context, model: patients[index])
                   );
+
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
