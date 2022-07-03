@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/bottom_appbar_sheet.dart';
@@ -67,24 +68,41 @@ class PatientPage extends StatelessWidget {
               backgroundColor: Colors.transparent,
             ),
             backgroundColor: backGroundColor1,
-            body: StreamBuilder<List<PatientModel>>(
-              stream: cubit.getPatients(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  print(snapshot.error);
-                  return const Center(child: Text("we got error"));
-                } else if (snapshot.hasData) {
-                  final patients = snapshot.data!;
-                  return ListView.builder(
-                    // children: patients.map(buildPatientCard).toList(),
-                    itemCount: patients.length,
-                    itemBuilder: (context,index)=> buildPatientCard(context: context, model: patients[index])
-                  );
-
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
+            body: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: StreamBuilder<List<PatientModel>>(
+                stream: cubit.getPatients(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    print(snapshot.error);
+                    return const Center(child: Text("we got error"));
+                  } else if (snapshot.hasData) {
+                    final patients = snapshot.data!;
+                    if(patients.isEmpty){
+                      return  Center(
+                          child:Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text("Add Patient from button below",style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18,color: Colors.blueGrey),),
+                              Icon(Icons.arrow_downward_sharp,color: Colors.blueGrey,size: 50,),
+                            ],
+                          )
+                      );
+                    }
+                    else{
+                    return ListView.builder(
+                      // children: patients.map(buildPatientCard).toList(),//listView
+                      itemCount: patients.length,
+                      itemBuilder: (context,index)=> buildPatientCard(context: context, model: patients[index])
+                    );
+                  }
+                  }
+                  else{
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
             floatingActionButton:  FloatingButt(),
             floatingActionButtonLocation:

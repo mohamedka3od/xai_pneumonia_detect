@@ -25,4 +25,9 @@ class NewPatientCreatedErrorState extends AppStates{
 }
 class GetPatientsState extends AppStates{}
 class GenderStateChanged extends AppStates{}
+class NewXrayAddedSuccessState extends AppStates{}
+class NewXrayAddedErrorState extends AppStates{
+  final String error;
 
+  NewXrayAddedErrorState(this.error);
+}

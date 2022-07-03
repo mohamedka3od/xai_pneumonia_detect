@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/models/user_model.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
@@ -54,7 +55,7 @@ class AppCubit extends Cubit<AppStates>{
     final patient = PatientModel(
       id: docPatient.id,
       name: name,
-      date: DateTime.now(),
+      date: DateFormat.yMMMd().format(DateTime.now()),
       age: 21,
       email: email,
       gender: gender,
@@ -72,6 +73,21 @@ class AppCubit extends Cubit<AppStates>{
     return patient.id;
 
   }
+  Future addPatientData({
+  required int week,
+  required String pid,
+})async{
+    final docPatient = FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').doc();
+    final data = PatientInfoModel(mid: docPatient.id, pid: pid, week: week, date: DateFormat.yMMMd().format(DateTime.now()));
+    docPatient.set(data.toMap())
+        .then((value){
+          emit(NewXrayAddedSuccessState());
+    }).catchError((error){
+      emit(NewXrayAddedErrorState(error));
+    });
+    return data.mid;
+  }
+
   Future deletePatient({required pId}){
     return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pId).delete();
   }
@@ -81,6 +97,14 @@ class AppCubit extends Cubit<AppStates>{
     .map((snapshot) => 
     snapshot.docs.map(
             (doc) => PatientModel.fromJson(doc.data())).toList()
+    );
+  }
+  Stream<List<PatientInfoModel>> getPatientData(String pid){
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').orderBy('date',descending: true)
+        .snapshots()
+        .map((snapshot) =>
+        snapshot.docs.map(
+                (doc) => PatientInfoModel.fromJson(doc.data())).toList()
     );
   }
 

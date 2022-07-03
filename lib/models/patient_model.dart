@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PatientModel{
 late String id;
 late String name;
-late DateTime date;
+late String date;
 late String? email;
 late String? phone;
 late int? age;
@@ -26,7 +25,7 @@ PatientModel.fromJson(Map<String,dynamic>?json)
   email = json['email'];
   name = json['name'];
   phone = json['phone'];
-  date= (json['date'] as Timestamp).toDate();
+  date= json['date'];
   age = json['age'];
   gender = json['gender'];
   notes = json['notes'];
@@ -45,5 +44,33 @@ Map<String,dynamic>toMap()
     'notes':notes,
   };
 }
+
+}
+class PatientInfoModel{
+  late String mid;
+  late String pid;
+  late int week;
+  late String date;
+  PatientInfoModel({
+    required this.mid,
+    required this.pid,
+    required this.week,
+    required this.date,
+});
+  PatientInfoModel.fromJson(Map<String,dynamic>?json){
+    mid = json!['mid'];
+    pid= json['pid'];
+    week = json['week'];
+    date = json['date'];
+  }
+  Map<String,dynamic>toMap(){
+    return {
+      'mid':mid,
+      'pid':pid,
+      'week':week,
+      'date':date,
+    };
+  }
+
 
 }

@@ -41,6 +41,7 @@ dependencies:
   dio: ^4.0.4
   conditional_builder_null_safety: ^0.0.6
   hexcolor: ^2.0.6
+  intl: ^0.17.0
   shared_preferences: ^2.0.13
   fluttertoast: ^8.0.9
   smooth_page_indicator: ^1.0.0+2
