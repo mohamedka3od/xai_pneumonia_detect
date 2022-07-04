@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/xray_picker_bsh.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/style/colors.dart';
@@ -118,7 +119,47 @@ class PatientInfo extends StatelessWidget {
               ],
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: HexColor("0000FF"),
+            child: const Icon(
+              Icons.add_circle_outline_outlined,
+            ),
+            onPressed: () {
+              showModalBottomSheet(
+                  backgroundColor: Colors.white,
+                  context: context,
+                  isScrollControlled: true,
+                  isDismissible: true,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(40),
+                      )),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  builder: (BuildContext context) {
+                    return Container(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Text(
+                              "Patient's Xray",
+                              style: TextStyle(
+                                  color: HexColor("0000FF"),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ),
 
+                          const XRayImgPicker(),
+
+                        ],
+                      ),
+                    );
+                  }
+              );
+            },
+          ),
 
 
         );
