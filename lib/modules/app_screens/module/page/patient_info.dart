@@ -1,3 +1,4 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -15,6 +16,7 @@ class PatientInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String pid = patient.id;
+    var week = 1;
     return BlocConsumer<AppCubit,AppStates>(
       listener: (context, state) {},
       builder: (context , state) {
@@ -38,9 +40,9 @@ class PatientInfo extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  [
-                const CircleAvatar(child: Icon(Icons.person,size: 50,),radius: 30,),
+                CircularProfileAvatar('',borderWidth: 3,borderColor: Colors.blue,backgroundColor: Colors.blue,radius: 50,imageFit: BoxFit.cover ,cacheImage: true,child:patient.imageUrl!.isEmpty?const Icon(Icons.person,size: 40,color:Colors.white,): Image(fit: BoxFit.fill, image: NetworkImage(patient.imageUrl!,)) ,),
                 const SizedBox(
-                  height:40,
+                  height:15,
                 ),
                 Text(
                   patient.name,
@@ -58,18 +60,18 @@ class PatientInfo extends StatelessWidget {
                         color: HexColor("#437FF6"),
                         fontWeight: FontWeight.w900,
                         fontSize: 16,
-                        height: 1,
+                        height: -1,
                       ),
                     ) ),
                 Container(
                   width: double.infinity,
+                  alignment: AlignmentDirectional.centerStart,
                   child: Text('X-Rays Results:',
                     style:Theme.of(context).textTheme.headline5?.copyWith(
                     color: HexColor('#060606'),
                     fontWeight: FontWeight.w100,
                     fontSize: 20,
                   ),),
-                  alignment: AlignmentDirectional.centerStart,
                 ),
                 Expanded(
                   child: StreamBuilder<List<PatientInfoModel>>(
@@ -98,6 +100,7 @@ class PatientInfo extends StatelessWidget {
                           );
                         }
                         else{
+                          week = patientData.length;
                           return ListView.builder(
                             // children: patients.map(buildPatientCard).toList(),//listView
                               itemCount: patientData.length,

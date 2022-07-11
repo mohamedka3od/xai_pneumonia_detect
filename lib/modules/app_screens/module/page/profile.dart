@@ -73,7 +73,7 @@ class MainScreen extends StatelessWidget {
                       const SizedBox(height: 15,),
                       EditText(data:model.email),
                       const SizedBox(height: 15,),
-                      EditText(data:model.phone),
+                      EditText(data:model.phone??'add Phone number'),
                     ],
                   ),
                 ),

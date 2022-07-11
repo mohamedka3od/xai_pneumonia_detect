@@ -1,3 +1,4 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
@@ -30,11 +31,7 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children:  [
-                  const CircleAvatar(
-                    radius: 24,
-                    child: Center(child: Icon(Icons.person, color: Colors.white,size: 40,)),
-                    backgroundColor: Colors.black,
-                  ),
+                  CircularProfileAvatar('',backgroundColor: Colors.blue,radius: 24,imageFit: BoxFit.cover ,cacheImage: true,child:model.imageUrl!.isEmpty?const Icon(Icons.person,size: 40,color:Colors.white,): Image(fit: BoxFit.fill, image: NetworkImage(model.imageUrl!,)) ,),
                   const SizedBox(
                     width: 10.0,
                   ),

@@ -35,27 +35,27 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   bloc: ^8.0.3
-  circular_profile_avatar: ^2.0.5
-  flutter_circular_text: "^0.3.1"
+  circular_profile_avatar:
+  flutter_circular_text:
   flutter_bloc: ^8.0.1
   dio: ^4.0.4
-  conditional_builder_null_safety: ^0.0.6
-  hexcolor: ^2.0.6
-  intl: ^0.17.0
+  conditional_builder_null_safety:
+  hexcolor:
+  intl:
   shared_preferences: ^2.0.13
-  fluttertoast: ^8.0.9
-  smooth_page_indicator: ^1.0.0+2
-  flutter_arc_text: ^0.5.0
+  fluttertoast:
+  smooth_page_indicator:
+  flutter_arc_text:
 
-  never_behind_keyboard: ^1.0.1
-    #firebase
-  firebase_core: ^1.14.0
-  firebase_auth: ^3.3.13
-  cloud_firestore: ^3.1.11
-  google_sign_in: ^5.2.4
-  advance_text_field: ^0.0.5
+  never_behind_keyboard:
+#firebase
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+  firebase_storage:
+  google_sign_in:
   image_picker:
-  rounded_loading_button: ^2.1.0
+  rounded_loading_button:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,7 +65,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
