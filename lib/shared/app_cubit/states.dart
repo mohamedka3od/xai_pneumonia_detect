@@ -31,3 +31,19 @@ class NewXrayAddedErrorState extends AppStates{
 
   NewXrayAddedErrorState(this.error);
 }
+class PatientImagePickedSuccessState extends AppStates{}
+class PatientImagePickedErrorState extends AppStates{}
+class StartPatientImageUploadState extends AppStates{}
+class PatientImageClearedState extends AppStates{}
+class PatientImageUploadSuccessState extends AppStates{}
+class PatientImageUploadErrorState extends AppStates{
+  final String error;
+
+  PatientImageUploadErrorState(this.error);
+}
+class UserProfileImageUploadSuccessState extends AppStates{}
+class UserProfileImageUploadErrorState extends AppStates{
+  final String error;
+
+  UserProfileImageUploadErrorState(this.error);
+}

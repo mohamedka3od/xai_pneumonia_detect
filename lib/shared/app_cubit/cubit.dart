@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/models/user_model.dart';
@@ -48,6 +53,7 @@ class AppCubit extends Cubit<AppStates>{
     required int age,
     String? email,
     String? phone,
+    String? imageUrl,
     required String gender,
     String? notes,
   })async{
@@ -55,6 +61,7 @@ class AppCubit extends Cubit<AppStates>{
     final patient = PatientModel(
       id: docPatient.id,
       name: name,
+      imageUrl: imageUrl,
       date: DateFormat.yMMMd().format(DateTime.now()),
       age: 21,
       email: email,
@@ -92,7 +99,7 @@ class AppCubit extends Cubit<AppStates>{
     return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pId).delete();
   }
   Stream<List<PatientModel>> getPatients(){
-    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').orderBy('date',descending: true)
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').orderBy('dateTime',descending: true)
     .snapshots()
     .map((snapshot) => 
     snapshot.docs.map(
@@ -100,13 +107,78 @@ class AppCubit extends Cubit<AppStates>{
     );
   }
   Stream<List<PatientInfoModel>> getPatientData(String pid){
-    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').orderBy('date',descending: true)
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').orderBy('dateTime',descending: true)
         .snapshots()
         .map((snapshot) =>
         snapshot.docs.map(
                 (doc) => PatientInfoModel.fromJson(doc.data())).toList()
     );
   }
+
+  File? patientImage;
+
+  Future getPatientImage(ImageSource source) async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(source: source);
+      if (pickedFile != null){
+        patientImage = File(pickedFile.path);
+        emit(PatientImagePickedSuccessState());
+      }
+      else{
+        print('no image selected');
+        emit(PatientImagePickedErrorState());
+      }
+    } on PlatformException catch (e) {
+      print('failed:$e');
+    }
+  }
+  void clearPatientImage(){
+    patientImage=null;
+    emit(PatientImageClearedState());
+  }
+
+
+  String patientImageUrl='';
+  Future uploadPatientImage() async{
+    if (patientImage == null) return;
+    emit(StartPatientImageUploadState());
+    return await FirebaseStorage.instance
+        .ref()
+        .child('users/$uId/patients/${Uri.file(patientImage!.path).pathSegments.last}')
+        .putFile(patientImage!)
+        .then((value)async{
+         await value.ref.getDownloadURL().then((value){
+            patientImageUrl = value;
+            print("uri is :$patientImageUrl");
+            patientImage!.delete();
+            emit(PatientImageUploadSuccessState());
+          }).catchError((error){
+            emit(PatientImageUploadErrorState(error));
+          });
+    })
+        .catchError((error){
+      emit(PatientImageUploadErrorState(error));
+    });
+  }
+  ///user image
+  // String userProfileImageUrl='';
+  // void uploadUserProfileImage(){
+  //   FirebaseStorage.instance
+  //       .ref()
+  //       .child('users/$uId/profile/${Uri.file(const ProfileImgPicker().image!.path).pathSegments.last}')
+  //       .putFile(const ProfileImgPicker().image!)
+  //       .then((value){
+  //         value.ref.getDownloadURL().then((value){
+  //           userProfileImageUrl = value;
+  //           emit(UserProfileImageUploadSuccessState());
+  //         }).catchError((error){
+  //           emit(UserProfileImageUploadErrorState(error));
+  //         });
+  //   })
+  //       .catchError((error){
+  //     emit(UserProfileImageUploadErrorState(error));
+  //   });
+  // }
 
 
 
