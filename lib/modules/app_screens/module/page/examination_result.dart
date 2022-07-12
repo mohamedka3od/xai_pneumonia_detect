@@ -24,9 +24,20 @@ class Result extends StatelessWidget {
                         border: Border.all(color: HexColor("0000FF"))),
                     width: double.infinity,
                     height: 200,
-                    child: Image.memory(
-                      bytesImage!,
-                      fit: BoxFit.fill,
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FullImage( bytesImage: bytesImage,)
+                                  )
+                      ) ,
+                      child: Hero(
+                        tag: "image",
+                        child: Image.memory(
+                          bytesImage!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -41,6 +52,27 @@ class Result extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+class FullImage extends StatelessWidget {
+  final Uint8List? bytesImage;
+  const FullImage({Key? key, this.bytesImage}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child :Hero(
+        tag: "fullimage",
+        child: InteractiveViewer(
+          minScale: 0.1,
+          maxScale: 1.6,
+          child: Image.memory(
+            bytesImage!,
+            fit: BoxFit.fill,
+          ),
+        ),
       ),
     );
   }

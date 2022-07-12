@@ -57,11 +57,11 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                           Expanded(
                             child: Row(
                               children: const [
-                                Text("not available yet",style:TextStyle(height: .5,),),
+                                Text("Pneumonia",style:TextStyle(height: .5,),),
                                 SizedBox(
                                   width: 2,
                                 ),
-                                Icon(Icons.circle,color: Colors.green,size: 10,),
+                                Icon(Icons.circle,color: Colors.red,size: 10,),
                               ],
                             ),
                           ),

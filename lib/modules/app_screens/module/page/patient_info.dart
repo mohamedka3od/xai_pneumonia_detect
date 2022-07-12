@@ -8,13 +8,18 @@ import 'package:xai_pneumonia_detect/shared/style/colors.dart';
 import '../../../../models/patient_model.dart';
 import '../../../../shared/components/build_patient_card.dart';
 
-class PatientInfo extends StatelessWidget {
+class PatientInfo extends StatefulWidget {
   final PatientModel patient;
   const PatientInfo({Key? key,required this.patient}) : super(key: key);
 
   @override
+  State<PatientInfo> createState() => _PatientInfoState();
+}
+
+class _PatientInfoState extends State<PatientInfo> {
+  @override
   Widget build(BuildContext context) {
-    final String pid = patient.id;
+    final String pid = widget.patient.id;
     return BlocConsumer<AppCubit,AppStates>(
       listener: (context, state) {},
       builder: (context , state) {
@@ -43,7 +48,7 @@ class PatientInfo extends StatelessWidget {
                   height:40,
                 ),
                 Text(
-                  patient.name,
+                  widget.patient.name,
                   style:Theme.of(context).textTheme.headline5?.copyWith(
                   color: HexColor('#060606'),
                   fontWeight: FontWeight.w100,

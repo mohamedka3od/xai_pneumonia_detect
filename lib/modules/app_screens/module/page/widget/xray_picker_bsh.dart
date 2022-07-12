@@ -37,7 +37,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
     print(selectedImage!);
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse("http://653f-34-133-219-111.ngrok.io/upload"),
+      Uri.parse("http://3236-34-105-102-17.ngrok.io/upload"),
     );
 
     final headers = {"Content-type": "multipart/form-data"};
@@ -173,7 +173,6 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:const  [
-                        Icon(Icons.upload,size: 30,color: Colors.white,),
                         Text('Examine',
                             style: TextStyle(color: Colors.white)),
                       ],
@@ -192,7 +191,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
      setState(() {
        onUploadImage(img);
      });
-      await Future.delayed(const Duration(seconds: 10));
+     await Future.delayed(const Duration(seconds: 10));
      if (response!.statusCode == 200) {
       Navigator.push(
        context,

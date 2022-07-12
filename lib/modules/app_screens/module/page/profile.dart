@@ -26,7 +26,7 @@ class MainScreen extends StatelessWidget {
             key: _scaffoldKey,
             drawer: const NavigationDrawerWidget(),
             appBar: CustomAppBar(
-              title: 'User Profile',
+              title: 'My Profile',
               childHeight: _iconSize,
               firstIcon: IconButton(
                 icon: const Icon(
