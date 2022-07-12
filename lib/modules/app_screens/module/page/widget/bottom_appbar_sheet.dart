@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -15,10 +16,11 @@ class FloatingButt extends StatelessWidget {
   final emailController = TextEditingController();
   final ageController = TextEditingController();
   final phoneController = TextEditingController();
-  final genderController = TextEditingController();
+
   final noteController = TextEditingController();
   final Color color = Colors.grey;
   final formKey = GlobalKey<FormState>();
+  final  _cnt = SingleValueDropDownController();
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +101,8 @@ class FloatingButt extends StatelessWidget {
                                                               nameController.text,
                                                               age: int.parse(
                                                                   ageController.text),
-                                                              gender: genderController
-                                                                  .text,
+                                                              gender: _cnt
+                                                                  .dropDownValue.toString(),
                                                               email: emailController
                                                                   .text,
                                                               phone: phoneController
@@ -195,7 +197,7 @@ class FloatingButt extends StatelessWidget {
                                                       phoneController.clear();
                                                       emailController.clear();
                                                       ageController.clear();
-                                                      genderController.clear();
+                                                      _cnt.clearDropDown();
                                                       noteController.clear();
                                                       cubit.clearPatientImage();
                                                       Navigator.pop(context);
@@ -383,28 +385,51 @@ class FloatingButt extends StatelessWidget {
                                                     Padding(
                                                       padding:
                                                       const EdgeInsets.all(8.0),
-                                                      child: defaultFormField(
-                                                          textInputAction:
-                                                          TextInputAction.next,
-                                                          elevation: 0,
-                                                          borderColor:
-                                                          HexColor('#0000FF'),
-                                                          iconColor:
-                                                          HexColor('#0080ff'),
-                                                          labelColor:
-                                                          HexColor('#0080ff'),
-                                                          controller:
-                                                          genderController,
-                                                          type: TextInputType.text,
-                                                          validate: (value) {
-                                                            if (value!.isEmpty) {
-                                                              return 'please enter Patient Genger';
-                                                            }
+                                                      child:  DropDownTextField(
+                                                        textFieldDecoration: InputDecoration(
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(25.0),
+                                                            borderSide: BorderSide(
+                                                              color: HexColor('#0000FF'),
+                                                              width: 2.0,
+                                                            ),
+                                                          ),
+                                                          contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                                                          errorStyle: const TextStyle(
+                                                            // fontSize: 9,
+                                                              height: .5
+                                                          ),
+                                                          fillColor: Colors.white,
+                                                          filled: true,
+                                                          border: const OutlineInputBorder(
+                                                            borderRadius: BorderRadius.all(Radius.circular(28.0)),
+                                                            borderSide: BorderSide(color: Colors.white),
+                                                          ),
+                                                          // labelText: label,
+                                                          hintText: "Patient Gender",
+
+                                                          hintStyle:TextStyle(color: HexColor('#0080ff')),
+                                                          prefixIcon: Icon(
+                                                            Icons.supervised_user_circle_outlined,
+                                                            color:HexColor('#0080ff'),
+                                                          ),
+                                                        ),
+                                                        singleController: _cnt,
+                                                        clearOption: false,
+                                                        validator: (value) {
+                                                          if (value == null) {
+                                                            return "Select Gender Please";
+                                                          } else {
                                                             return null;
-                                                          },
-                                                          label: 'Patient Gender',
-                                                          prefix: Icons
-                                                              .supervised_user_circle_outlined),
+                                                          }
+                                                        },
+                                                        dropDownItemCount: 2,
+                                                        dropDownList: const [
+                                                          DropDownValueModel(name: 'Male', value: "Male"),
+                                                          DropDownValueModel(name: 'Female', value: "Female"),
+                                                        ],
+                                                        onChanged: (val) {},
+                                                      ),
                                                     ),
                                                     Padding(
                                                       padding: const EdgeInsets.only(

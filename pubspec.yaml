@@ -47,8 +47,11 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   flutter_arc_text: ^0.5.0
 
+  dropdown_textfield: ^1.0.3
   never_behind_keyboard: ^1.0.1
     #firebase
+
+  firebase_storage:
   firebase_core: ^1.14.0
   firebase_auth: ^3.3.13
   cloud_firestore: ^3.1.11
