@@ -102,7 +102,7 @@ class FloatingButt extends StatelessWidget {
                                                               age: int.parse(
                                                                   ageController.text),
                                                               gender: _cnt
-                                                                  .dropDownValue.toString(),
+                                                                  .dropDownValue!.value.toString(),
                                                               email: emailController
                                                                   .text,
                                                               phone: phoneController
@@ -428,7 +428,9 @@ class FloatingButt extends StatelessWidget {
                                                           DropDownValueModel(name: 'Male', value: "Male"),
                                                           DropDownValueModel(name: 'Female', value: "Female"),
                                                         ],
-                                                        onChanged: (val) {},
+                                                        onChanged: (val) {
+                                                          //print(_cnt.dropDownValue!.value);
+                                                        },
                                                       ),
                                                     ),
                                                     Padding(

@@ -106,6 +106,14 @@ class AppCubit extends Cubit<AppStates>{
             (doc) => PatientModel.fromJson(doc.data())).toList()
     );
   }
+  Stream<List<PatientModel>> getImportantPatients(){
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').orderBy('dateTime',descending: true).where('important', isEqualTo: true)
+    .snapshots()
+    .map((snapshot) => 
+    snapshot.docs.map(
+            (doc) => PatientModel.fromJson(doc.data())).toList()
+    );
+  }
   Stream<List<PatientInfoModel>> getPatientData(String pid){
     return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').orderBy('dateTime',descending: true)
         .snapshots()
@@ -179,6 +187,15 @@ class AppCubit extends Cubit<AppStates>{
   //     emit(UserProfileImageUploadErrorState(error));
   //   });
   // }
+ void changeImportantState(PatientModel model){
+    FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(model.id)
+        .update({'important':!model.important}).then((value) {
+          emit(ChangeImportantSuccessState());
+    }).catchError((error){
+      emit(ChangeImportantErrorState(error));
+    });
+
+ }
 
 
 

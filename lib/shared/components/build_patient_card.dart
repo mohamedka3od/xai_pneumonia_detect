@@ -4,9 +4,9 @@ import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
-
-Widget buildPatientCard({required BuildContext context ,required PatientModel model})=>
-    Padding(
+Widget buildPatientCard({required BuildContext context ,required PatientModel model}) {
+  var cubit = AppCubit.get(context);
+  return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Material(
         color: Colors.white,
@@ -70,15 +70,98 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                   const SizedBox(
                     width: 10.0,
                   ),
-                  TextButton(onPressed: (){},
-                      child:const Text(
-                        '...',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 30,
-                            height: 1
-                        ),))
+                  Center(
+                    child: PopupMenuButton<String>(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      onSelected: (val){},
+                      icon: const Icon(Icons.more_horiz_rounded ,size: 35,color: Colors.blue,),
+                      itemBuilder: (context){
+                        return[
+                          PopupMenuItem(
+                              padding: const EdgeInsets.only(right: 5, left: 20),
+                              onTap: (){
+                                cubit.changeImportantState(model);
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                    SnackBar(
+                                        content: model.important? const Text('removed from important'):const Text('added to important'),
+                                      backgroundColor: Colors.blue,
+                                    )
+                                );
+
+                              },
+                              value: 'important',
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children:  [
+                                      const Expanded(
+                                        child: Text(
+                                          'Important',
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        model.important?Icons.check_box_rounded:Icons.check_box_outline_blank_outlined,
+                                        size: 20,
+                                        color: Colors.blue,
+                                      ),
+
+                                    ],
+                                  ),
+                                  const Divider()
+                                ],
+                              )),
+                          PopupMenuItem(
+                              padding: const EdgeInsets.only(right: 5, left: 20),
+                              onTap: (){
+                                cubit.deletePatient(pId: model.id);
+                                ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(content: Text('patient deleted'),backgroundColor: Colors.blue,));
+
+                              },
+                              value: 'delete',
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children:  const [
+                                      Expanded(
+                                        child: Text(
+                                          'Delete',
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        Icons.delete,
+                                        size: 20,
+                                        color: Colors.blue,
+                                      ),
+
+                                    ],
+                                  ),
+                                  const Divider()
+                                ],
+                              )),
+
+                        ];
+                      },
+
+                    ),
+                  )
                 ],
               ),
             ),
@@ -86,6 +169,7 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
         ),
       ),
     );
+}
 
 Widget buildPatientInfoCard({required BuildContext context ,required PatientInfoModel model})=>
     Padding(

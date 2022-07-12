@@ -12,6 +12,7 @@ late int? age;
 late String? gender;
 late String? notes;
 late String? imageUrl;
+late bool important;
 PatientModel({
   this.id='',
   required this.name,
@@ -21,7 +22,7 @@ PatientModel({
   this.age,
   this.gender,
   this.notes,
-  this.imageUrl
+  this.imageUrl,
 });
 
 PatientModel.fromJson(Map<String,dynamic>?json)
@@ -36,6 +37,7 @@ PatientModel.fromJson(Map<String,dynamic>?json)
   gender = json['gender'];
   notes = json['notes'];
   imageUrl= json['imageUrl'];
+  important = json['important'];
 }
 
 Map<String,dynamic>toMap()
@@ -51,6 +53,7 @@ Map<String,dynamic>toMap()
     'age':age,
     'gender':gender,
     'notes':notes,
+    'important':false,
   };
 }
 
