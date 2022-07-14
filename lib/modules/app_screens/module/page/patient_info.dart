@@ -28,7 +28,7 @@ class PatientInfo extends StatelessWidget {
             elevation: 0,
             leading: IconButton(
               icon:  Icon(
-                Icons.arrow_back_ios_rounded, color: backGroundColor2,),
+                Icons.arrow_back_ios_rounded, color: backGroundColor3,),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -40,7 +40,7 @@ class PatientInfo extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  [
-                CircularProfileAvatar('',borderWidth: 3,borderColor: Colors.blue,backgroundColor: Colors.blue,radius: 50,imageFit: BoxFit.cover ,cacheImage: true,child:patient.imageUrl!.isEmpty?const Icon(Icons.person,size: 40,color:Colors.white,): Image(fit: BoxFit.fill, image: NetworkImage(patient.imageUrl!,)) ,),
+                CircularProfileAvatar('',borderWidth: 3,borderColor: Colors.blue,backgroundColor: backGroundColor3,radius: 50,imageFit: BoxFit.cover ,cacheImage: true,child:patient.imageUrl!.isEmpty?const Icon(Icons.person,size: 40,color:Colors.white,): Image(fit: BoxFit.fill, image: NetworkImage(patient.imageUrl!,)) ,),
                 const SizedBox(
                   height:15,
                 ),
@@ -123,7 +123,7 @@ class PatientInfo extends StatelessWidget {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: HexColor("0000FF"),
+            backgroundColor: backGroundColor3,
             child: const Icon(
               Icons.add_circle_outline_outlined,
             ),
@@ -148,7 +148,7 @@ class PatientInfo extends StatelessWidget {
                             child: Text(
                               "Patient's Xray",
                               style: TextStyle(
-                                  color: HexColor("0000FF"),
+                                  color: backGroundColor3,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),
                             ),

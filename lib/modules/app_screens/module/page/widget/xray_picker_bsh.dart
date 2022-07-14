@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
+import '../../../../../shared/style/colors.dart';
 import '../examination_result.dart';
 
 class XRayImgPicker extends StatefulWidget {
@@ -106,7 +107,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
                     children: [
                       Icon(
                         Icons.add_circle_outline_outlined,
-                        color: HexColor('#0000FF'),
+                        color: backGroundColor3,
                         size: 50,
                       ),
                       const Text(
@@ -143,7 +144,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
                           ));
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: HexColor("0000FF"),
+                  primary:backGroundColor3,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
@@ -169,7 +170,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
                 child: RoundedLoadingButton(
 
                     borderRadius: 5,
-                    color: HexColor('#0000FF'),
+                    color: backGroundColor3,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:const  [

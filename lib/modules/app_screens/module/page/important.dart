@@ -35,7 +35,7 @@ class ImportantPage extends StatelessWidget {
               ),
               leading: IconButton(
                 icon: CircleAvatar(
-                  backgroundColor: backGroundColor2,
+                  backgroundColor: backGroundColor3,
                   child: const Icon(
                     Icons.menu,
                     color: Colors.white,
@@ -47,7 +47,7 @@ class ImportantPage extends StatelessWidget {
               ),
               title:  Text(
                 'Important',
-                style: TextStyle(color: backGroundColor2),
+                style: TextStyle(color: backGroundColor3),
               ),
               centerTitle: true,
               backgroundColor: Colors.transparent,

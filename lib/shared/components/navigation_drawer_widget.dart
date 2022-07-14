@@ -10,6 +10,7 @@ import '../../modules/app_screens/module/page/patients.dart';
 import '../../modules/app_screens/module/page/profile.dart';
 import '../../modules/app_screens/module/page/settings.dart';
 import '../../network/local/cache_helper.dart';
+import '../style/colors.dart';
 import 'components.dart';
 import '../../modules/login/login_screen.dart';
 
@@ -26,16 +27,16 @@ class NavigationDrawerWidget extends StatelessWidget {
     final urlImage = Pro_Data().image;
     return Drawer(
       child: Material(
-        color: HexColor('#0000FF'),
+        color: backGroundColor3,
         child: ListView(
           children: <Widget>[
             Container(
               height: MediaQuery.of(context).size.height / 5,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+              decoration:  const BoxDecoration(
+                borderRadius:  BorderRadius.only(
                   bottomRight: Radius.circular(50),
                 ),
-                color: Color.fromRGBO(50, 75, 205, 1),
+                color: defaultColor,
               ),
               child: buildHeader(
                   urlImage: urlImage,
@@ -145,9 +146,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const CircleAvatar(
+               CircleAvatar(
                 radius: 24,
-                backgroundColor: Color.fromRGBO(30, 60, 168, 1),
+                backgroundColor: backGroundColor3,
                 child: Icon(Icons.add_comment_outlined, color: Colors.white),
               )
             ],

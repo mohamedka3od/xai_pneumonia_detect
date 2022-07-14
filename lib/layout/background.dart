@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+
+
+import '../shared/style/colors.dart';
 Widget backGround(BuildContext context, {required Widget widget})=>
     Container(
       width: double.infinity,
@@ -11,7 +13,7 @@ Widget backGround(BuildContext context, {required Widget widget})=>
           width: double.infinity,
           decoration:  BoxDecoration(
             shape: BoxShape.rectangle,
-            color: HexColor('#0000FF'),
+            color: backGroundColor3,
           ),
         ),
       ),

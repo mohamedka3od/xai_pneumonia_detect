@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 
+import '../../../../../shared/style/colors.dart';
+
 class ProfileImgPicker extends StatelessWidget {
   const ProfileImgPicker({Key? key}) : super(key: key);
 
@@ -55,7 +57,7 @@ class ProfileImgPicker extends StatelessWidget {
                 // sets on tap
                 showInitialTextAbovePicture: false,
                 child:cubit.patientImage != null
-                    ?Image.file(cubit.patientImage!, fit: BoxFit.cover,):  Icon(Icons.add_a_photo_outlined,color: HexColor('#0000FF'),size: 50,),
+                    ?Image.file(cubit.patientImage!, fit: BoxFit.cover,): const Icon(Icons.add_a_photo_outlined,color: defaultColor,size: 50,),
               ),
             ],
           ),

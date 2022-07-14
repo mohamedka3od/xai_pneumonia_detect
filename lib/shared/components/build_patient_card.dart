@@ -4,6 +4,8 @@ import 'package:xai_pneumonia_detect/models/patient_model.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
+
+import '../style/colors.dart';
 Widget buildPatientCard({required BuildContext context ,required PatientModel model}) {
   var cubit = AppCubit.get(context);
   return Padding(
@@ -31,7 +33,7 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children:  [
-                  CircularProfileAvatar('',backgroundColor: Colors.blue,radius: 24,imageFit: BoxFit.cover ,cacheImage: true,child:model.imageUrl!.isEmpty?const Icon(Icons.person,size: 40,color:Colors.white,): Image(fit: BoxFit.fill, image: NetworkImage(model.imageUrl!,)) ,),
+                  CircularProfileAvatar('',backgroundColor: backGroundColor3,radius: 24,imageFit: BoxFit.cover ,cacheImage: true,child:model.imageUrl!.isEmpty?const Icon(Icons.person,size: 40,color:Colors.white,): Image(fit: BoxFit.fill, image: NetworkImage(model.imageUrl!,)) ,),
                   const SizedBox(
                     width: 10.0,
                   ),
@@ -54,15 +56,18 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                           Expanded(
                             child: Row(
                               children: const [
-                                Text("Pneumonia",style:TextStyle(height: .5,),),
+                                Text("Pneumonia",style:TextStyle(height: 0.1,),),
                                 SizedBox(
                                   width: 2,
                                 ),
-                                Icon(Icons.circle,color: Colors.red,size: 10,),
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 8.0),
+                                  child: Icon(Icons.circle,color: Colors.red,size: 10,),
+                                ),
                               ],
                             ),
                           ),
-                           Text(model.date,style: const TextStyle(height: .5,color: Colors.grey),),
+                           Text(model.date,style: const TextStyle(height: 0.5,color: Colors.grey,fontSize: 12),),
                         ],
                       ),
                     ),
@@ -74,7 +79,7 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                     child: PopupMenuButton<String>(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       onSelected: (val){},
-                      icon: const Icon(Icons.more_horiz_rounded ,size: 35,color: Colors.blue,),
+                      icon:  Icon(Icons.more_horiz_rounded ,size: 35,color: backGroundColor3,),
                       itemBuilder: (context){
                         return[
                           PopupMenuItem(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../style/colors.dart';
+
 class MyWidget extends StatelessWidget {
   const MyWidget({Key? key}) : super(key: key);
 
@@ -41,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Container(
                   width: double.maxFinite,
                   height: preferredSize.height - childHeight,
-                  color: HexColor('#0000FF'),
+                  color: backGroundColor3,
                   alignment: Alignment.topCenter,
                   child: Row(
                     children: <Widget>[

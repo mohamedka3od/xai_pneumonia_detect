@@ -8,6 +8,7 @@ import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
 import '../../../../../shared/app_cubit/cubit.dart';
 import '../../../../../shared/app_cubit/states.dart';
+import '../../../../../shared/style/colors.dart';
 
 class FloatingButt extends StatelessWidget {
   FloatingButt({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class FloatingButt extends StatelessWidget {
         return Padding(
             padding: const EdgeInsets.all(1),
             child: FloatingActionButton(
-              backgroundColor: HexColor('#0000FF'),
+              backgroundColor: backGroundColor3,
               child: const Icon(Icons.add),
               onPressed: () {
                 showModalBottomSheet(
@@ -64,7 +65,7 @@ class FloatingButt extends StatelessWidget {
                                           height: 76,
                                           width:
                                           MediaQuery.of(context).size.width,
-                                          color: HexColor('#0000FF'),
+                                          color: backGroundColor3,
                                         ),
                                         Container(
                                           width: double.infinity,
@@ -178,7 +179,7 @@ class FloatingButt extends StatelessWidget {
                                                     hoverElevation: 0,
                                                     focusElevation: 0,
                                                     highlightElevation: 0,
-                                                    color: HexColor('#0000FF'),
+                                                    color: backGroundColor3,
                                                     shape: RoundedRectangleBorder(
                                                         borderRadius:
                                                         const BorderRadius
@@ -514,20 +515,12 @@ class BotBar extends StatelessWidget {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 5,
-      color: HexColor('#0000FF'),
+      color: backGroundColor3,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.home, color: Colors.white),
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const MyXray()),
-              //);
-            },
-          ),
+        children: const  <Widget>[
+          Text("",style: TextStyle(fontSize: 20),)
           // IconButton(
           //     icon: const Icon(Icons.upload_rounded, color: Colors.white),
           //     onPressed: () {})

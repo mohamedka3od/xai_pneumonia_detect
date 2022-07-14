@@ -46,7 +46,7 @@ dependencies:
   fluttertoast:
   smooth_page_indicator:
   flutter_arc_text:
-
+  convex_bottom_bar: ^3.0.0
   dropdown_textfield:
   never_behind_keyboard:
   advance_text_field:

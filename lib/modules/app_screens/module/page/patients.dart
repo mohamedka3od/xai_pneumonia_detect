@@ -36,7 +36,7 @@ class PatientPage extends StatelessWidget {
               ),
               leading: IconButton(
                 icon: CircleAvatar(
-                  backgroundColor: backGroundColor2,
+                  backgroundColor: backGroundColor3,
                   child: const Icon(
                     Icons.menu,
                     color: Colors.white,
@@ -51,7 +51,7 @@ class PatientPage extends StatelessWidget {
                   iconSize: 40,
                     onPressed: (){},
                     icon: CircleAvatar(
-                    backgroundColor:backGroundColor2,
+                    backgroundColor:backGroundColor3,
                         child: const Icon(
                           Icons.search_rounded,
                           color: Colors.white,
@@ -61,7 +61,7 @@ class PatientPage extends StatelessWidget {
               ],
               title:  Text(
                 'Patients',
-                style: TextStyle(color: backGroundColor2),
+                style: TextStyle(color: backGroundColor3),
               ),
               centerTitle: true,
               backgroundColor: Colors.transparent,

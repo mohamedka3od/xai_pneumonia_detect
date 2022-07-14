@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../style/colors.dart';
+
 void navigateTo(context, widget) => Navigator.push(
     context,
     MaterialPageRoute(
@@ -106,7 +108,7 @@ Widget defaultButton({
         child: Text(
           isUpperCase ? text.toUpperCase() : text,
           style:  TextStyle(
-            color: HexColor('#0000FF'),
+            color: backGroundColor3,
             fontWeight: FontWeight.bold
           ),
         ),
