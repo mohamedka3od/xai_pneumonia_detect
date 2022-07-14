@@ -9,17 +9,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
-import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
 import '../../../../../shared/style/colors.dart';
 import '../examination_result.dart';
 
 class XRayImgPicker extends StatefulWidget {
-  final File? image;
-  final String? pId;
-  final int? week;
+  final String pId;
+  final int week;
 
-  const XRayImgPicker({Key? key, this.image,this.pId,this.week}) : super(key: key);
+  const XRayImgPicker({Key? key,required this.pId,required this.week}) : super(key: key);
 
   @override
   State<XRayImgPicker> createState() => _XRayImgPickerState();
@@ -29,9 +27,8 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
   final RoundedLoadingButtonController _btnController =
   RoundedLoadingButtonController();
   late File img;
-  String? pId = const XRayImgPicker().pId;
-  int? week = const XRayImgPicker().week;
-  File? image = const XRayImgPicker().image;
+   File? image;
+
   String message = '';
   String predict = '';
   String rate = '';
@@ -44,7 +41,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
     print(selectedImage!);
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse("http://90bf-34-143-230-239.ngrok.io/upload"),
+      Uri.parse("http://7ac6-35-184-36-114.ngrok.io/upload"),
     );
 
     final headers = {"Content-type": "multipart/form-data"};
@@ -194,15 +191,17 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
      setState(() {
        onUploadImage(img);
      });
-     await Future.delayed(const Duration(seconds: 10));
+     await Future.delayed(const Duration(seconds: 20));
      if (response!.statusCode == 200) {
-       AppCubit.get(context).addPatientData(week: week!, pid: pId!, imageUrl:message, rate: rate, predict: predict);
-       Navigator.pop(context);
-      navigateTo(context, Result(
+       AppCubit.get(context).addPatientData(week: widget.week, pid:widget.pId, imageUrl:message, rate: rate, predict: predict);
+       Navigator.push(
+           context,
+           MaterialPageRoute(
+               builder: (context) =>Result(
         message:
         message,
         rate: rate,
-        predict: predict,));
+        predict: predict,)));
 
       _btnController.stop();
      }
