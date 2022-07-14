@@ -4,7 +4,6 @@ import 'package:xai_pneumonia_detect/modules/login/login_screen.dart';
 import 'package:xai_pneumonia_detect/modules/register/register_screen.dart';
 
 import '../../shared/components/components.dart';
-import '../../shared/style/colors.dart';
 
 class LRScreen extends StatelessWidget {
   const LRScreen({Key? key}) : super(key: key);
@@ -17,7 +16,15 @@ class LRScreen extends StatelessWidget {
     Container(
     width: double.infinity,
     height: MediaQuery.of(context).size.height,
-      color: backGroundColor3,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [
+          HexColor('#00008F'),
+          HexColor('#0000FF'),
+        ],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+        ),
+      ),
     ),
     Scaffold(
       backgroundColor: Colors.transparent,

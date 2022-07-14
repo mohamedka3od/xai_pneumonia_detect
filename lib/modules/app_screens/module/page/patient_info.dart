@@ -139,25 +139,23 @@ class PatientInfo extends StatelessWidget {
                       )),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   builder: (BuildContext context) {
-                    return Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Text(
-                              "Patient's Xray",
-                              style: TextStyle(
-                                  color: backGroundColor3,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Text(
+                            "Patient's Xray",
+                            style: TextStyle(
+                                color: backGroundColor3,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
                           ),
+                        ),
 
-                          const XRayImgPicker(),
+                         XRayImgPicker(pId: pid,week: week,),
 
-                        ],
-                      ),
+                      ],
                     );
                   }
               );

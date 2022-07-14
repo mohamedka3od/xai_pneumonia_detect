@@ -47,6 +47,12 @@ class UserProfileImageUploadErrorState extends AppStates{
 
   UserProfileImageUploadErrorState(this.error);
 }
+class XrayImageUploadSuccessState extends AppStates{}
+class XrayImageUploadErrorState extends AppStates{
+  final String error;
+
+  XrayImageUploadErrorState(this.error);
+}
 class ChangeImportantSuccessState extends AppStates{}
 class ChangeImportantErrorState extends AppStates{
   final String error;

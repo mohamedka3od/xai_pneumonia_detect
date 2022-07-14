@@ -64,18 +64,27 @@ class PatientInfoModel{
   late int week;
   late String date;
   late DateTime dateTime;
+  late String? imageUrl;
+  late String? predict;
+  late String? rate;
   PatientInfoModel({
     required this.mid,
     required this.pid,
     required this.week,
     required this.date,
-});
+    this.imageUrl,
+    this.predict,
+    this.rate,
+  });
   PatientInfoModel.fromJson(Map<String,dynamic>?json){
     mid = json!['mid'];
     pid= json['pid'];
     week = json['week'];
     date = json['date'];
     dateTime= (json['dateTime'] as Timestamp).toDate();
+    imageUrl= json['imageUrl'];
+    predict=json['predict'];
+    rate=json['rate'];
   }
   Map<String,dynamic>toMap(){
     return {
@@ -84,6 +93,9 @@ class PatientInfoModel{
       'week':week,
       'date':date,
       'dateTime':DateTime.now(),
+      'imageUrl':imageUrl,
+      'predict':predict,
+      'rate':rate,
     };
   }
 

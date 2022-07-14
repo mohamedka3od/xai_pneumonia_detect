@@ -83,16 +83,19 @@ class AppCubit extends Cubit<AppStates>{
   Future addPatientData({
   required int week,
   required String pid,
+  required String imageUrl,
+  required String rate,
+  required String predict,
 })async{
-    final docPatient = FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').doc();
-    final data = PatientInfoModel(mid: docPatient.id, pid: pid, week: week, date: DateFormat.yMMMd().format(DateTime.now()));
-    docPatient.set(data.toMap())
-        .then((value){
-          emit(NewXrayAddedSuccessState());
-    }).catchError((error){
-      emit(NewXrayAddedErrorState(error));
-    });
-    return data.mid;
+      final docPatient = FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pid).collection('data').doc();
+      final data = PatientInfoModel(mid: docPatient.id, pid: pid, week: week, date: DateFormat.yMMMd().format(DateTime.now()),imageUrl: imageUrl,rate: rate,predict: predict);
+      docPatient.set(data.toMap())
+          .then((value){
+        emit(NewXrayAddedSuccessState());
+      }).catchError((error){
+        emit(NewXrayAddedErrorState(error));
+      });
+      return data.mid;
   }
 
   Future deletePatient({required pId}){
@@ -168,6 +171,26 @@ class AppCubit extends Cubit<AppStates>{
       emit(PatientImageUploadErrorState(error));
     });
   }
+  String xrayImageUrl='';
+  Future uploadXrayImage(File image) async{
+    return await FirebaseStorage.instance
+        .ref()
+        .child('users/$uId/patients/${Uri.file(image.path).pathSegments.last}')
+        .putFile(image)
+        .then((value)async{
+         await value.ref.getDownloadURL().then((value){
+            xrayImageUrl = value;
+            print("xRay uri is :$xrayImageUrl");
+            emit(XrayImageUploadSuccessState());
+          }).catchError((error){
+            emit(XrayImageUploadErrorState(error));
+          });
+    })
+        .catchError((error){
+      emit(PatientImageUploadErrorState(error));
+    });
+  }
+
   ///user image
   // String userProfileImageUrl='';
   // void uploadUserProfileImage(){

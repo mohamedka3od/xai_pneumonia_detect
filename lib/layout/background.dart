@@ -13,7 +13,7 @@ Widget backGround(BuildContext context, {required Widget widget})=>
           width: double.infinity,
           decoration:  BoxDecoration(
             shape: BoxShape.rectangle,
-            color: backGroundColor3,
+            color: backGroundColor2,
           ),
         ),
       ),

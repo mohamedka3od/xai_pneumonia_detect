@@ -1,6 +1,7 @@
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/examination_result.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
@@ -18,7 +19,6 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
           splashColor: Colors.blue.withOpacity(.5),
           borderRadius: BorderRadius.circular(70),
           onTap: (){
-            AppCubit.get(context).addPatientData(week: 1, pid: model.id);
             navigateTo(context, PatientInfo(patient: model));
           },
           child: Container(
@@ -187,7 +187,7 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
           splashColor: Colors.blue.withOpacity(.5),
           borderRadius: BorderRadius.circular(70),
           onTap: (){
-            //navigateTo(context, PatientInfo(patient: model));
+            navigateTo(context, Result(message: model.imageUrl,predict: model.predict, rate: model.rate,));
           },
           child: Container(
             decoration: BoxDecoration(
@@ -225,12 +225,12 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
                         children: [
                           Expanded(
                             child: Row(
-                              children: const [
-                                Text("not available yet",style:TextStyle(height: 1.2,),),
-                                SizedBox(
+                              children:  [
+                                Text(model.predict??"not available yet",style:const TextStyle(height: 1.2,),),
+                                const SizedBox(
                                   width: 2,
                                 ),
-                               Icon(Icons.circle,color: Colors.green,size: 10,),
+                               const Icon(Icons.circle,color: Colors.green,size: 10,),
                               ],
                             ),
                           ),
