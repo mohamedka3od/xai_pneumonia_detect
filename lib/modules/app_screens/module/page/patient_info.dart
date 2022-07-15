@@ -100,7 +100,7 @@ class PatientInfo extends StatelessWidget {
                           );
                         }
                         else{
-                          week = patientData.length;
+                          week = patientData.length+1;
                           return ListView.builder(
                             // children: patients.map(buildPatientCard).toList(),//listView
                               itemCount: patientData.length,

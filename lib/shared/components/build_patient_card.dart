@@ -230,7 +230,7 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
                                 const SizedBox(
                                   width: 2,
                                 ),
-                               const Icon(Icons.circle,color: Colors.green,size: 10,),
+                                Icon(Icons.circle,color: model.predict == "Pneumonia" ? Colors.red:Colors.green ,size: 10,),
                               ],
                             ),
                           ),
