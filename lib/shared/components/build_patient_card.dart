@@ -204,12 +204,12 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Week: ${model.week}",
+                      "Examination: ${model.week}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           height: 1,
-                          fontSize: 18
+                          fontSize: 16
                       ),
 
                     ),

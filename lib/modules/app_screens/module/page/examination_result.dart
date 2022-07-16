@@ -50,7 +50,17 @@ class Result extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "X-Ray Classified as ${predict!}",
+                "X-Ray Classified as ${predict!} ",
+                style: TextStyle(
+                    color: HexColor("0000FF"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "with confidence ${rate!}%",
                 style: TextStyle(
                     color: HexColor("0000FF"),
                     fontWeight: FontWeight.bold,

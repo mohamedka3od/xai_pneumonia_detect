@@ -41,7 +41,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
     print(selectedImage!);
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse("http://e44f-34-73-50-8.ngrok.io/upload"),
+      Uri.parse("http://a1df-34-74-52-211.ngrok.io/upload"),
     );
 
     final headers = {"Content-type": "multipart/form-data"};
