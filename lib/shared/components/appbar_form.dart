@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 import '../style/colors.dart';
 
@@ -49,21 +48,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     children: <Widget>[
                       if (firstIcon != null) firstIcon,
                       if (firstIcon != null) Expanded(child: Container()),
-                      Text(
-                        title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 40),
+                        child: Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                       Expanded(child: Container()),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.search_sharp,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
                     ],
                   ),
                 ),

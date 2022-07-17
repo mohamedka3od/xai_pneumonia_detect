@@ -13,6 +13,69 @@ import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import '../../../../../shared/style/colors.dart';
 import '../examination_result.dart';
 
+String url = '';
+class URL extends StatefulWidget {
+  const URL({Key? key}) : super(key: key);
+
+  @override
+  State<URL> createState() => _URLState();
+}
+
+class _URLState extends State<URL> {
+  final UrlController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('API URL'),
+      content:  SizedBox(
+        height: 60,
+        child: TextField(
+          style:
+          TextStyle(color: Colors.blue),
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(top: 5),
+            hintText: 'Enter Url',
+
+            hintStyle: TextStyle(
+                color: HexColor(
+                    '#0080ff')),
+            prefixIcon: Icon(
+                Icons.link,
+                color: HexColor(
+                    '#0080ff')),
+            filled: true,
+            fillColor: Colors.white12,
+            enabledBorder:
+            OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: HexColor(
+                      '#0000FF')),
+            ),
+            focusedBorder:
+            OutlineInputBorder(
+              borderRadius:
+              BorderRadius
+                  .circular(5),
+              borderSide: BorderSide(
+                  color: HexColor(
+                      '#0000FF')),
+            ),
+          ),
+          controller: UrlController,
+        ),
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+          child: const Text("Enter"),
+          onPressed: (){
+            url = UrlController.text;
+            Navigator.pop(context);}
+        ),
+      ],
+    );
+  }
+}
+
 class XRayImgPicker extends StatefulWidget {
   final String pId;
   final int week;
@@ -41,7 +104,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
     print(selectedImage!);
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse("http://a1df-34-74-52-211.ngrok.io/upload"),
+      Uri.parse(url),
     );
 
     final headers = {"Content-type": "multipart/form-data"};

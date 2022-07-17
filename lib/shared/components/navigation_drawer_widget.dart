@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
@@ -9,10 +8,10 @@ import '../../modules/app_screens/module/page/important.dart';
 import '../../modules/app_screens/module/page/patients.dart';
 import '../../modules/app_screens/module/page/profile.dart';
 import '../../modules/app_screens/module/page/settings.dart';
+import '../../modules/login_or_register/login_register_screen.dart';
 import '../../network/local/cache_helper.dart';
 import '../style/colors.dart';
 import 'components.dart';
-import '../../modules/login/login_screen.dart';
 
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -213,11 +212,11 @@ class NavigationDrawerWidget extends StatelessWidget {
       case 3:
         break;
       case 4:
-      //LOgout Hereeeeeeee
+      //LOgout Here
         CacheHelper.removeData(key: 'uId').then((value) {
           if (value) {
             AppCubit.get(context).signOut();
-            navigateAndFinish(context, LoginScreen());
+            navigateAndFinish(context, const LRScreen());
           }
         });
         break;
