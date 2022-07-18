@@ -2,6 +2,7 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/more_info.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/xray_picker_bsh.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
@@ -88,7 +89,9 @@ class PatientInfo extends StatelessWidget {
                         ),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        navigateTo(context, MoreInfo());
+                      },
                       child: Text(
                         'more info',
                         style: TextStyle(

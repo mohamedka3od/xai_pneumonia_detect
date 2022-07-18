@@ -46,11 +46,13 @@ dependencies:
   fluttertoast:
   smooth_page_indicator:
   flutter_arc_text:
+  animated_splash_screen:
   convex_bottom_bar: ^3.0.0
   dropdown_textfield:
   never_behind_keyboard:
   advance_text_field:
   image_picker:
+  flutter_svg:
   rounded_loading_button:
 #firebase
 
@@ -61,9 +63,14 @@ dependencies:
   google_sign_in:
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.9.2"
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/1024.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

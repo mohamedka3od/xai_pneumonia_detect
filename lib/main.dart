@@ -1,7 +1,9 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:hexcolor/hexcolor.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/bloc_observer.dart';
@@ -27,10 +29,66 @@ void main() {
       Widget widget;
       uId = CacheHelper.getData(key: 'uId');
         if(uId != null){
-          widget =  MainScreen();
+          widget =   Container(
+            child: AnimatedSplashScreen(
+
+              duration: 300,
+              splash: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:const  [
+                   Image(
+                    image:  AssetImage('assets/images/lung.png'),
+                    width:150,
+                    height:150,
+                     fit: BoxFit.fill,
+                  ),
+                   Text('Pneumonia Detection',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  )
+                ],
+              ),
+              nextScreen: MainScreen(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.bottomToTop,
+              splashIconSize: 2000,
+              backgroundColor: HexColor('#0000FF'),),
+          );
         }
         else{
-          widget = const LRScreen();
+          widget = Container(
+            child: AnimatedSplashScreen(
+
+              duration: 300,
+              splash: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image:  AssetImage('assets/images/lung.png'),
+                    width:150,
+                    height:150,
+                    fit: BoxFit.fill,
+                  ),
+                  const Text('Pneumonia Detection',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  )
+                ],
+              ),
+              nextScreen: LRScreen(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.bottomToTop,
+              splashIconSize: 2000,
+              backgroundColor: HexColor('#0000FF'),),
+          );
         }
       runApp(MyApp(isDark:isDark,startWidget:widget));
     },

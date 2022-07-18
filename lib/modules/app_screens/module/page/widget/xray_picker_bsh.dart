@@ -254,7 +254,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
      setState(() {
        onUploadImage(img);
      });
-     await Future.delayed(const Duration(seconds: 20));
+     await Future.delayed(const Duration(seconds: 12));
      if (response!.statusCode == 200) {
        AppCubit.get(context).addPatientData(week: widget.week, pid:widget.pId, imageUrl:message, rate: rate, predict: predict);
        Navigator.push(
@@ -265,8 +265,8 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
         message,
         rate: rate,
         predict: predict,)));
-
       _btnController.stop();
+       Navigator.pop(context);
      }
 
   }

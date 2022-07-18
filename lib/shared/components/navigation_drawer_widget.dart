@@ -4,6 +4,7 @@ import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 
 import '../../modules/app_screens/module/data/data.dart';
+import '../../modules/app_screens/module/page/about.dart';
 import '../../modules/app_screens/module/page/important.dart';
 import '../../modules/app_screens/module/page/patients.dart';
 import '../../modules/app_screens/module/page/profile.dart';
@@ -75,7 +76,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                     onClicked: () => selectedItem(context, 3),
                   ),
                   const SizedBox(height: 24),
-                  const Divider(color: Colors.white70),
+                  const Divider(color: Colors.white70,),
                   const SizedBox(height: 24),
                   buildMenuItem(
                     text: 'Logout',
@@ -210,6 +211,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateTo(context,  Settings());
         break;
       case 3:
+
         break;
       case 4:
       //LOgout Here
@@ -221,6 +223,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         });
         break;
       case 5:
+        navigateTo(context,  About());
         break;
     }
   }
