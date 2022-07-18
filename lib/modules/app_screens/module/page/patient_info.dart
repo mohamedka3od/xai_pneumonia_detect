@@ -90,7 +90,7 @@ class PatientInfo extends StatelessWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        navigateTo(context, MoreInfo());
+                        navigateTo(context, MoreInfo(patient: patient,));
                       },
                       child: Text(
                         'more info',
