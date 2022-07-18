@@ -20,54 +20,56 @@ class Result extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: HexColor("0000FF"))),
-                      width: double.infinity,
-                      height: 200,
-                      child: GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FullImage( bytesImage: bytesImage,)
-                                    )
-                        ) ,
-                        child: Hero(
-                          tag: "image",
-                          child: Image.memory(
-                            bytesImage,
-                            fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: HexColor("0000FF"))),
+                        width: double.infinity,
+                        height: 200,
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FullImage( bytesImage: bytesImage,)
+                                      )
+                          ) ,
+                          child: Hero(
+                            tag: "image",
+                            child: Image.memory(
+                              bytesImage,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "X-Ray Classified as ${predict!} ",
-                style: TextStyle(
-                    color: HexColor("0000FF"),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "X-Ray Classified as ${predict!} ",
+                  style: TextStyle(
+                      color: HexColor("0000FF"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "with confidence ${rate!}%",
-                style: TextStyle(
-                    color: HexColor("0000FF"),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "with confidence ${rate!}%",
+                  style: TextStyle(
+                      color: HexColor("0000FF"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

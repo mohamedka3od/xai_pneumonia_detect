@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/search_patient.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/bottom_appbar_sheet.dart';
+import 'package:xai_pneumonia_detect/shared/components/components.dart';
 import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
 import 'package:xai_pneumonia_detect/shared/style/colors.dart';
 import '../../../../shared/app_cubit/cubit.dart';
@@ -49,7 +51,9 @@ class PatientPage extends StatelessWidget {
               actions: [
                 IconButton(
                   iconSize: 40,
-                    onPressed: (){},
+                    onPressed: (){
+                    navigateTo(context, SearchScreen());
+                    },
                     icon: CircleAvatar(
                     backgroundColor:backGroundColor3,
                         child: const Icon(

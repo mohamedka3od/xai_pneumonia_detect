@@ -41,7 +41,7 @@ class PatientInfo extends StatelessWidget {
               actions: [
                 IconButton(
                     onPressed: () {
-                          navigateTo(context, URL() );
+                          navigateTo(context, const URL() );
                     },
                     icon: Icon(
                       Icons.link,
@@ -61,7 +61,7 @@ class PatientInfo extends StatelessWidget {
                     borderWidth: 3,
                     borderColor: Colors.blue,
                     backgroundColor: backGroundColor3,
-                    radius: 50,
+                    radius: 45,
                     imageFit: BoxFit.cover,
                     cacheImage: true,
                     child: patient.imageUrl!.isEmpty
@@ -124,24 +124,26 @@ class PatientInfo extends StatelessWidget {
                           final patientData = snapshot.data!;
                           if (patientData.isEmpty) {
                             return Center(
-                                child: Column(
+                                child: SingleChildScrollView(
+                                  child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Text(
-                                  "Add X-Ray from button below",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.blueGrey),
-                                ),
-                                Icon(
-                                  Icons.arrow_downward_sharp,
-                                  color: Colors.blueGrey,
-                                  size: 50,
-                                ),
+                                  Text(
+                                    "Add X-Ray from button below",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.blueGrey),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_downward_sharp,
+                                    color: Colors.blueGrey,
+                                    size: 50,
+                                  ),
                               ],
-                            ));
+                            ),
+                                ));
                           } else {
                             week = patientData.length + 1;
                             return ListView.builder(
@@ -150,7 +152,7 @@ class PatientInfo extends StatelessWidget {
                                 itemBuilder: (context, index) =>
                                     buildPatientInfoCard(
                                         context: context,
-                                        model: patientData[index]));
+                                        model: patientData[index],index: index+1));
                           }
                         } else {
                           return const Center(

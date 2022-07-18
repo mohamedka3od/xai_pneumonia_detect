@@ -79,7 +79,7 @@ class RegisterCubit extends Cubit<RegisterStates>
 
   ////google sign in
   Future<UserCredential> signInWithGoogle() async {
-
+    emit(GoogleRegisterLoadingState());
     final GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
     // Trigger the authentication flow

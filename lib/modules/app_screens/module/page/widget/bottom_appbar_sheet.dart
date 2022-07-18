@@ -3,7 +3,10 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
+import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patients.dart';
 import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/image_picker.dart';
+import 'package:xai_pneumonia_detect/shared/components/build_patient_card.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
 import '../../../../../shared/app_cubit/cubit.dart';
@@ -67,7 +70,7 @@ class FloatingButt extends StatelessWidget {
                                           MediaQuery.of(context).size.width,
                                           color: backGroundColor3,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: double.infinity,
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -113,42 +116,45 @@ class FloatingButt extends StatelessWidget {
                                                               imageUrl: cubit.patientImageUrl
                                                           )
                                                               .then((value) {
-                                                            lPId = value.toString();
+                                                            lPId = value.id;
                                                             condition =true;
                                                             cubit.patientImageUrl='';
                                                             cubit.clearPatientImage();
                                                             Navigator.pop(context);
+                                                            navigateTo(context, PatientInfo(patient: value));
                                                             // If the form is valid, display a snackbar. In the real world,
                                                             // you'd often call a server or save the information in a database.
-                                                            ScaffoldMessenger.of(
-                                                                context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: const Text(
-                                                                    'Patient Created'),
-                                                                action:
-                                                                SnackBarAction(
-                                                                    label:
-                                                                    "undo",
-                                                                    onPressed:
-                                                                        () {
-                                                                      cubit.deletePatient(pId: lPId).then(
-                                                                              (value) {
-                                                                            showToast(
-                                                                                text:
-                                                                                'Patient Deleted',
-                                                                                state:
-                                                                                ToastStates.SUCESS);
-                                                                          }).catchError(
-                                                                              (error) {
-                                                                            showToast(
-                                                                                text:
-                                                                                error.toString(),
-                                                                                state: ToastStates.ERROR);
-                                                                          });
-                                                                    }),
-                                                              ),
-                                                            );
+                                                            ///snakbar
+                                                            // ScaffoldMessenger.of(
+                                                            //     context)
+                                                            //     .showSnackBar(
+                                                            //   SnackBar(
+                                                            //     content: const Text(
+                                                            //         'Patient Created'),
+                                                            //     action:
+                                                            //     SnackBarAction(
+                                                            //         label:
+                                                            //         "undo",
+                                                            //         onPressed:
+                                                            //             () {
+                                                            //               cubit.deletePatient(pId: lPId).then(
+                                                            //                   (value) {
+                                                            //                 showToast(
+                                                            //                     text:
+                                                            //                     'Patient Deleted',
+                                                            //                     state:
+                                                            //                     ToastStates.SUCESS);
+                                                            //               }).catchError(
+                                                            //                   (error) {
+                                                            //                 showToast(
+                                                            //                     text:
+                                                            //                     error.toString(),
+                                                            //                     state: ToastStates.ERROR);
+                                                            //               });
+                                                            //         }),
+                                                            //   ),
+                                                            // );
+                                                            showToast(text: 'Patient Created', state: ToastStates.SUCESS);
                                                           }).catchError((error) {
                                                             showToast(
                                                                 text: error

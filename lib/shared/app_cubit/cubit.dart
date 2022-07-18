@@ -77,7 +77,7 @@ class AppCubit extends Cubit<AppStates>{
     .catchError((error){
       emit(NewPatientCreatedErrorState(error.toString()));
     });
-    return patient.id;
+    return patient;
 
   }
   Future addPatientData({
@@ -101,12 +101,28 @@ class AppCubit extends Cubit<AppStates>{
   Future deletePatient({required pId}){
     return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pId).delete();
   }
+  Future deleteResult({required pId,required xid}){
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').doc(pId).collection('data').doc(xid).delete();
+  }
   Stream<List<PatientModel>> getPatients(){
     return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').orderBy('dateTime',descending: true)
     .snapshots()
     .map((snapshot) => 
     snapshot.docs.map(
             (doc) => PatientModel.fromJson(doc.data())).toList()
+    );
+  }
+  String name = '';
+  void changeName(String newName){
+    name = newName;
+    emit(SearchNameChangeState());
+  }
+  Stream<List<PatientModel>> searchPatients(){
+    return FirebaseFirestore.instance.collection('users').doc(uId).collection('patients').where('name', isGreaterThanOrEqualTo:  name )
+        .snapshots()
+        .map((snapshot) =>
+        snapshot.docs.map(
+                (doc) => PatientModel.fromJson(doc.data())).toList()
     );
   }
   Stream<List<PatientModel>> getImportantPatients(){

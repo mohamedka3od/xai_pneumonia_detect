@@ -31,9 +31,9 @@ class _URLState extends State<URL> {
         height: 60,
         child: TextField(
           style:
-          TextStyle(color: Colors.blue),
+          const TextStyle(color: Colors.blue),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(top: 5),
+            contentPadding: const EdgeInsets.only(top: 5),
             hintText: 'Enter Url',
 
             hintStyle: TextStyle(
@@ -102,7 +102,7 @@ class _XRayImgPickerState extends State<XRayImgPicker> {
   http.Response? response;
   onUploadImage(File? selectedImage) async {
     print(selectedImage!);
-    final request = http.MultipartRequest(
+    final request =  http.MultipartRequest(
       'POST',
       Uri.parse(url),
     );

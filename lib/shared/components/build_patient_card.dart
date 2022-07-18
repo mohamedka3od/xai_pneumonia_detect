@@ -48,25 +48,26 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
-                                height: 1,
+                                // height: 1,
                                 fontSize: 18
                             ),
 
                           ),
-                          Expanded(
-                            child: Row(
-                              children: const [
-                                Text("Pneumonia",style:TextStyle(height: 0.1,),),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 8.0),
-                                  child: Icon(Icons.circle,color: Colors.red,size: 10,),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: Row(
+                          //     children: const [
+                          //       Text("Pneumonia",style:TextStyle(height: 0.1,),),
+                          //       SizedBox(
+                          //         width: 2,
+                          //       ),
+                          //       Padding(
+                          //         padding: EdgeInsets.only(bottom: 8.0),
+                          //         child: Icon(Icons.circle,color: Colors.red,size: 10,),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          const SizedBox(height: 5,),
                            Text(model.date,style: const TextStyle(height: 0.5,color: Colors.grey,fontSize: 12),),
                         ],
                       ),
@@ -86,13 +87,14 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                               padding: const EdgeInsets.only(right: 5, left: 20),
                               onTap: (){
                                 cubit.changeImportantState(model);
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(
-                                    SnackBar(
-                                        content: model.important? const Text('removed from important'):const Text('added to important'),
-                                      backgroundColor: Colors.blue,
-                                    )
-                                );
+                                // ScaffoldMessenger.of(context)
+                                //     .showSnackBar(
+                                //     SnackBar(
+                                //         content: model.important? const Text('removed from important'):const Text('added to important'),
+                                //       backgroundColor: Colors.blue,
+                                //     )
+                                // );
+                                showToast(text: model.important? 'removed from important':'added to important' , state: ToastStates.SUCESS);
 
                               },
                               value: 'important',
@@ -128,9 +130,9 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
                               padding: const EdgeInsets.only(right: 5, left: 20),
                               onTap: (){
                                 cubit.deletePatient(pId: model.id);
-                                ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(content: Text('patient deleted'),backgroundColor: Colors.blue,));
-
+                                // ScaffoldMessenger.of(context)
+                                //       .showSnackBar(const SnackBar(content: Text('patient deleted'),backgroundColor: Colors.blue,));
+                                showToast(text: 'Patient deleted', state: ToastStates.SUCESS);
                               },
                               value: 'delete',
                               child: Column(
@@ -176,8 +178,9 @@ Widget buildPatientCard({required BuildContext context ,required PatientModel mo
     );
 }
 
-Widget buildPatientInfoCard({required BuildContext context ,required PatientInfoModel model})=>
-    Padding(
+Widget buildPatientInfoCard({required BuildContext context ,required PatientInfoModel model ,required int index}) {
+  var cubit = AppCubit.get(context);
+  return Padding(
       padding: const EdgeInsets.only(top: 8.0,bottom: 0.8),
       child: Material(
         color: Colors.white,
@@ -204,7 +207,7 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Examination: ${model.week}",
+                      "Examination: $index",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -223,6 +226,7 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const SizedBox(height: 6,),
                           Expanded(
                             child: Row(
                               children:  [
@@ -242,15 +246,49 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
                   const SizedBox(
                     width: 10.0,
                   ),
-                  TextButton(onPressed: (){},
-                      child:const Text(
-                        '...',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 30,
-                            height: 1
-                        ),))
+                  Center(
+                    child: PopupMenuButton<String>(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      onSelected: (val){},
+                      icon:  Icon(Icons.more_horiz_rounded ,size: 35,color: backGroundColor3,),
+                      itemBuilder: (context){
+                        return[
+                          PopupMenuItem(
+                              padding: const EdgeInsets.only(right: 5, left: 20),
+                              onTap: (){
+                                cubit.deleteResult(xid: model.mid,pId: model.pid).then((value) => showToast(text: 'Patient deleted', state: ToastStates.SUCESS));
+                                // ScaffoldMessenger.of(context)
+                                //       .showSnackBar(const SnackBar(content: Text('patient deleted'),backgroundColor: Colors.blue,));
+
+                              },
+                              value: 'delete',
+                              child: Row(
+                                children:  const [
+                                  Expanded(
+                                    child: Text(
+                                      'Delete',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(
+                                    Icons.delete,
+                                    size: 20,
+                                    color: Colors.blue,
+                                  ),
+                                ],
+                              )),
+                        ];
+                      },
+
+                    ),
+                  ),
+
                 ],
               ),
             ),
@@ -258,3 +296,4 @@ Widget buildPatientInfoCard({required BuildContext context ,required PatientInfo
         ),
       ),
     );
+}

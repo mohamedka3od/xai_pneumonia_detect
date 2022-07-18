@@ -49,6 +49,7 @@ class LoginCubit extends Cubit<LoginStates>
   }
 
   Future<UserCredential> signInWithGoogle() async {
+    emit(GoogleLoginLoadingState());
     final GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
     // Trigger the authentication flow

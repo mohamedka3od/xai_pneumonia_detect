@@ -34,6 +34,7 @@ Widget defaultFormField({
   IconData? suffix,
   Function? suffixPressed,
   Function()? onTap,
+  Function(String)? onChange,
   bool isAutofocus = false,
 }) =>
     Material(
@@ -48,6 +49,7 @@ Widget defaultFormField({
         obscureText: isPassword,
         autofocus:  isAutofocus,
         onFieldSubmitted: onSubmit,
+        onChanged: onChange,
         onTap: onTap,
         validator: validate,
         decoration: InputDecoration(

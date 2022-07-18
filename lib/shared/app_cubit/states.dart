@@ -53,6 +53,7 @@ class XrayImageUploadErrorState extends AppStates{
 
   XrayImageUploadErrorState(this.error);
 }
+class SearchNameChangeState extends AppStates{}
 class ChangeImportantSuccessState extends AppStates{}
 class ChangeImportantErrorState extends AppStates{
   final String error;
