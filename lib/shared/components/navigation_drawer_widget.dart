@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 
-import '../../modules/app_screens/module/data/data.dart';
-import '../../modules/app_screens/module/page/about.dart';
-import '../../modules/app_screens/module/page/important.dart';
-import '../../modules/app_screens/module/page/patients.dart';
-import '../../modules/app_screens/module/page/profile.dart';
-import '../../modules/app_screens/module/page/settings.dart';
+
 import '../../modules/login_or_register/login_register_screen.dart';
+import '../../modules/pages/about.dart';
+import '../../modules/pages/important.dart';
+import '../../modules/pages/patients.dart';
+import '../../modules/pages/profile.dart';
+import '../../modules/pages/settings.dart';
 import '../../network/local/cache_helper.dart';
 import '../style/colors.dart';
 import 'components.dart';

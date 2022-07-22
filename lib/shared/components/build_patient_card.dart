@@ -1,11 +1,11 @@
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:xai_pneumonia_detect/models/patient_model.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/examination_result.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
+import '../../modules/pages/examination_result.dart';
+import '../../modules/pages/patient_info.dart';
 import '../style/colors.dart';
 Widget buildPatientCard({required BuildContext context ,required PatientModel model}) {
   var cubit = AppCubit.get(context);

@@ -11,7 +11,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 
 import '../../../../../shared/style/colors.dart';
-import '../examination_result.dart';
+import '../../../modules/pages/examination_result.dart';
 
 String url = '';
 class URL extends StatefulWidget {

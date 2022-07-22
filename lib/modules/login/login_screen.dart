@@ -1,7 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patients.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/states.dart';
 import '../../network/local/cache_helper.dart';
@@ -10,7 +9,7 @@ import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
-import '../app_screens/module/page/profile.dart';
+import '../pages/patients.dart';
 import '../register/register_screen.dart';
 
 

@@ -2,14 +2,14 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/more_info.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/xray_picker_bsh.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/style/colors.dart';
 import '../../../../models/patient_model.dart';
 import '../../../../shared/components/build_patient_card.dart';
 import '../../../../shared/components/components.dart';
+import '../../../../shared/components/widget/xray_picker_bsh.dart';
+import 'more_info.dart';
 
 class PatientInfo extends StatelessWidget {
   final PatientModel patient;

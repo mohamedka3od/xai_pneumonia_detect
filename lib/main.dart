@@ -11,17 +11,15 @@ import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 import 'package:xai_pneumonia_detect/shared/style/themes.dart';
 
 
-import 'modules/app_screens/module/page/profile.dart';
 import 'modules/login_or_register/login_register_screen.dart';
+import 'modules/pages/profile.dart';
 import 'network/local/cache_helper.dart';
-import 'network/remote/dio_helper.dart';
 
 void main() {
   BlocOverrides.runZoned(
         () async {
       WidgetsFlutterBinding.ensureInitialized();
       await CacheHelper.init();
-      DioHelper.init();
       await Firebase.initializeApp(
         // options: DefaultFirebaseOptions.currentPlatform,
       );

@@ -7,7 +7,6 @@ import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import '../../../../shared/components/constants.dart';
 import '../../../../shared/components/edit_textfield.dart';
 import '../../../../shared/components/navigation_drawer_widget.dart';
-import '../data/data.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);

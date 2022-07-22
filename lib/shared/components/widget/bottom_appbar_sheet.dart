@@ -3,15 +3,13 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patient_info.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/patients.dart';
-import 'package:xai_pneumonia_detect/modules/app_screens/module/page/widget/image_picker.dart';
-import 'package:xai_pneumonia_detect/shared/components/build_patient_card.dart';
 import 'package:xai_pneumonia_detect/shared/components/components.dart';
 
 import '../../../../../shared/app_cubit/cubit.dart';
 import '../../../../../shared/app_cubit/states.dart';
 import '../../../../../shared/style/colors.dart';
+import '../../../modules/pages/patient_info.dart';
+import 'image_picker.dart';
 
 class FloatingButt extends StatelessWidget {
   FloatingButt({Key? key}) : super(key: key);
@@ -28,7 +26,7 @@ class FloatingButt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String lPId;
+    late String lPId;
     bool condition = true;
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) => {},
