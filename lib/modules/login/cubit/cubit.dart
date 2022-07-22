@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:xai_pneumonia_detect/models/user_model.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/states.dart';
 
 import '../../../models/login_model.dart';
+import '../../../shared/components/constants.dart';
 
 
 
@@ -24,11 +26,11 @@ class LoginCubit extends Cubit<LoginStates>
     FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password
-    ).then((value) {
-      print(value.user!.email);
-      print(value.user!.uid);
+    ).then((value) async{
+     await FirebaseFirestore.instance.collection("users").doc(value.user!.uid).get().then((value) {
+        model = UserModel.fromJson(value.data());
+      });
       emit(LoginSuccessState(value.user!.uid));
-
     }).catchError((error){
       emit(LoginErrorState(error.toString()));
       print(error.toString());
@@ -47,6 +49,7 @@ class LoginCubit extends Cubit<LoginStates>
   }
 
   Future<UserCredential> signInWithGoogle() async {
+    emit(GoogleLoginLoadingState());
     final GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
     // Trigger the authentication flow
@@ -69,7 +72,6 @@ class LoginCubit extends Cubit<LoginStates>
         'uId',
         isEqualTo: _user.uid,
       ).get();
-      emit(GoogleLoginSuccessState(_user.uid));
       final List<DocumentSnapshot> _documentSnapshots = resultQuery.docs;
       if(_documentSnapshots.isEmpty){
         FirebaseFirestore.instance.collection("users").doc(_user.uid).set(
@@ -79,7 +81,17 @@ class LoginCubit extends Cubit<LoginStates>
           'phone': _user.phoneNumber,
           'name' : _user.displayName,
         }).then((value){
-          print('user data saved');
+          model = UserModel(email: _user.email, name: _user.displayName, phone: _user.phoneNumber, uId: _user.uid);
+          emit(GoogleLoginSuccessState(_user.uid));
+        }).catchError((error){
+          print(error);
+          emit(GoogleLoginErrorState(error.toString()));
+        });
+      }
+      else{
+        FirebaseFirestore.instance.collection("users").doc(_user.uid).get().then((value) {
+          model = UserModel.fromJson(value.data());
+          emit(GoogleLoginSuccessState(_user.uid));
         }).catchError((error){
           print(error);
           emit(GoogleLoginErrorState(error.toString()));

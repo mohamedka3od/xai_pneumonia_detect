@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+
+import '../style/colors.dart';
 
 class MyWidget extends StatelessWidget {
   const MyWidget({Key? key}) : super(key: key);
@@ -41,27 +42,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Container(
                   width: double.maxFinite,
                   height: preferredSize.height - childHeight,
-                  color: HexColor('#0000FF'),
+                  color: backGroundColor3,
                   alignment: Alignment.topCenter,
                   child: Row(
                     children: <Widget>[
                       if (firstIcon != null) firstIcon,
                       if (firstIcon != null) Expanded(child: Container()),
-                      Text(
-                        title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .copyWith(color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 40),
+                        child: Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                       Expanded(child: Container()),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.search_sharp,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
                     ],
                   ),
                 ),

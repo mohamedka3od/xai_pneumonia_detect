@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/page/patients.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/page/important.dart';
 
-import 'package:xai_pneumonia_detect/modules/main_screen/module/page/settings.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
+import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 
-import '../../../../network/local/cache_helper.dart';
-import '../../../../shared/components/components.dart';
-import '../../../login/login_screen.dart';
+
+import '../../modules/login_or_register/login_register_screen.dart';
+import '../../modules/pages/about.dart';
+import '../../modules/pages/important.dart';
+import '../../modules/pages/patients.dart';
+import '../../modules/pages/profile.dart';
+import '../../modules/pages/settings.dart';
+import '../../network/local/cache_helper.dart';
+import '../style/colors.dart';
+import 'components.dart';
+
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
@@ -18,33 +22,31 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final name = 'Monkey D Luffy';
-    final email = 'MonkeyDG4@oneP.com';
-    final urlImage =
-        'https://image.winudf.com/v2/image/Y29tLkdoYW54aXMuTW9ua2V5REx1ZmZ5V2FsbHBhcGVySERfc2NyZWVuXzJfMTUyMzg4NTIzNF8wNDg/screen-2.jpg?fakeurl=1&type=.webp';
-
+    final name = model.name;
+    final email = model.email;
+    final urlImage = Pro_Data().image;
     return Drawer(
       child: Material(
-        color: HexColor('#0000FF'),
+        color: backGroundColor3,
         child: ListView(
           children: <Widget>[
             Container(
               height: MediaQuery.of(context).size.height / 5,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+              decoration:  const BoxDecoration(
+                borderRadius:  BorderRadius.only(
                   bottomRight: Radius.circular(50),
                 ),
-                color: Color.fromRGBO(50, 75, 205, 1),
+                color: defaultColor,
               ),
               child: buildHeader(
                   urlImage: urlImage,
                   name: name,
                   email: email,
                   onClicked: () => Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainScreen()),
+                    context,
+                    MaterialPageRoute(builder: (context) => MainScreen()),
                         (Route<dynamic> route) => false,
-                      )),
+                  )),
             ),
             Container(
               padding: padding,
@@ -74,7 +76,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                     onClicked: () => selectedItem(context, 3),
                   ),
                   const SizedBox(height: 24),
-                  const Divider(color: Colors.white70),
+                  const Divider(color: Colors.white70,),
                   const SizedBox(height: 24),
                   buildMenuItem(
                     text: 'Logout',
@@ -97,9 +99,9 @@ class NavigationDrawerWidget extends StatelessWidget {
   }
 
   Widget buildHeader({
-    required String urlImage,
-    required String name,
-    required String email,
+    required String? urlImage,
+    required String? name,
+    required String? email,
     required VoidCallback onClicked,
   }) =>
       InkWell(
@@ -108,7 +110,15 @@ class NavigationDrawerWidget extends StatelessWidget {
           padding: padding.add(const EdgeInsets.symmetric(vertical: 20)),
           child: Row(
             children: [
-              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
+              Container(
+                width: 70,
+                height: 70,
+                child: CircleAvatar(
+
+                  foregroundImage: AssetImage(Pro_Data().image),
+                  //child: Image.asset(Pro_Data().image),
+                ),
+              ),
               const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,7 +127,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      name,
+                      name!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 20, color: Colors.white),
@@ -127,7 +137,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   Container(
                     width: 120,
                     child: Text(
-                      email,
+                      email!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 14, color: Colors.white),
@@ -136,9 +146,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const CircleAvatar(
+               CircleAvatar(
                 radius: 24,
-                backgroundColor: Color.fromRGBO(30, 60, 168, 1),
+                backgroundColor: backGroundColor3,
                 child: Icon(Icons.add_comment_outlined, color: Colors.white),
               )
             ],
@@ -197,22 +207,23 @@ class NavigationDrawerWidget extends StatelessWidget {
         navigateAndFinish(context, ImportantPage());
         break;
       case 2:
-        //setting
+      //setting
         navigateTo(context,  Settings());
         break;
       case 3:
-        AppCubit.get(context).createPatient();
+
         break;
       case 4:
-        //LOgout Hereeeeeeee
+      //LOgout Here
         CacheHelper.removeData(key: 'uId').then((value) {
           if (value) {
             AppCubit.get(context).signOut();
-            navigateAndFinish(context, LoginScreen());
+            navigateAndFinish(context, const LRScreen());
           }
         });
         break;
       case 5:
+        navigateTo(context,  About());
         break;
     }
   }

@@ -14,6 +14,7 @@ class LoginErrorState extends LoginStates {
   LoginErrorState(this.error);
 }
 class LoginChangePasswordVisibilityState extends LoginStates {}
+class GoogleLoginLoadingState extends LoginStates {}
 class GoogleLoginSuccessState extends LoginStates {
   final String uId;
   GoogleLoginSuccessState(this.uId);

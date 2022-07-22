@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/module/widget/navigation_drawer_widget.dart';
 
-class Settings extends StatelessWidget {
+import 'package:xai_pneumonia_detect/shared/components/navigation_drawer_widget.dart';
+import 'package:xai_pneumonia_detect/shared/style/colors.dart';
+
+
+class Settings extends StatefulWidget {
   Settings({Key? key}) : super(key: key);
+
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -20,11 +29,11 @@ class Settings extends StatelessWidget {
             _scaffoldKey.currentState!.openDrawer();
           },
         ),
-        title: const Text('Settings'),
+        title: const Text('Settings', style: TextStyle(color: Colors.white),),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: backGroundColor3,
       ),
-      body: const Center(child:  Text('Settings')),
+      body: Container(),
     );
   }
 }

@@ -8,7 +8,7 @@ import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
-import '../main_screen/main_screen.dart';
+import '../pages/profile.dart';
 import '../register/cubit/cubit.dart';
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({Key? key}) : super(key: key);
@@ -27,13 +27,13 @@ class RegisterScreen extends StatelessWidget {
         listener:(context ,state) {
           if(state is RegisterErrorState ){
             showToast(
-              text: state.error,
+              text: state.error.toString().replaceRange(0, 14, '').split(']')[1],
               state: ToastStates.ERROR ,
             );
           }
           else if(state is GoogleRegisterErrorState){
             showToast(
-              text: state.error,
+              text: state.error.toString().replaceRange(0, 14, '').split(']')[1],
               state: ToastStates.ERROR ,
             );
           }
@@ -206,12 +206,16 @@ class RegisterScreen extends StatelessWidget {
                    SizedBox(
                     height: (height)/80,
                   ),
-                  googleButton(
-                      context,
-                      text:'Sign up with Google',
-                    onPressed: (){
-                      RegisterCubit.get(context).signInWithGoogle();
-                    }
+                  ConditionalBuilder(
+                    condition: state is !GoogleRegisterLoadingState,
+                    fallback: (context)=>const Center(child:  CircularProgressIndicator(),),
+                    builder:(context)=> googleButton(
+                        context,
+                        text:'Sign up with Google',
+                      onPressed: (){
+                        RegisterCubit.get(context).signInWithGoogle();
+                      }
+                    ),
                   ),
                    SizedBox(
                     height: (height)/80,

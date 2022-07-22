@@ -19,6 +19,7 @@ class CreateUserErrorState extends RegisterStates {
   CreateUserErrorState(this.error);
 }
 class RegisterChangePasswordVisibilityState extends RegisterStates {}
+class GoogleRegisterLoadingState extends RegisterStates {}
 class GoogleRegisterSuccessState extends RegisterStates {
   final String uId;
   GoogleRegisterSuccessState(this.uId);

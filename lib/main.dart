@@ -1,43 +1,93 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/shared/app_cubit/states.dart';
 import 'package:xai_pneumonia_detect/shared/bloc_observer.dart';
 import 'package:xai_pneumonia_detect/shared/components/constants.dart';
 import 'package:xai_pneumonia_detect/shared/style/themes.dart';
 
-import 'layout/app_layout.dart';
+
 import 'modules/login_or_register/login_register_screen.dart';
+import 'modules/pages/profile.dart';
 import 'network/local/cache_helper.dart';
-import 'network/remote/dio_helper.dart';
-import 'on_boarding/on_boarding_screen.dart';
 
 void main() {
   BlocOverrides.runZoned(
         () async {
       WidgetsFlutterBinding.ensureInitialized();
       await CacheHelper.init();
-      DioHelper.init();
       await Firebase.initializeApp(
         // options: DefaultFirebaseOptions.currentPlatform,
       );
       bool isDark = CacheHelper.getData(key: 'isDark') ?? false;
       Widget widget;
-      bool onBoarding = CacheHelper.getData(key: 'onBoarding') ?? false;
       uId = CacheHelper.getData(key: 'uId');
-      if(onBoarding){
         if(uId != null){
-          widget =  MainScreen();
+          widget =   Container(
+            child: AnimatedSplashScreen(
+
+              duration: 300,
+              splash: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:const  [
+                   Image(
+                    image:  AssetImage('assets/images/lung.png'),
+                    width:150,
+                    height:150,
+                     fit: BoxFit.fill,
+                  ),
+                   Text('Pneumonia Detection',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  )
+                ],
+              ),
+              nextScreen: MainScreen(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.bottomToTop,
+              splashIconSize: 2000,
+              backgroundColor: HexColor('#0000FF'),),
+          );
         }
         else{
-          widget = const LRScreen();
+          widget = Container(
+            child: AnimatedSplashScreen(
+
+              duration: 300,
+              splash: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image:  AssetImage('assets/images/lung.png'),
+                    width:150,
+                    height:150,
+                    fit: BoxFit.fill,
+                  ),
+                  const Text('Pneumonia Detection',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  )
+                ],
+              ),
+              nextScreen: LRScreen(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.bottomToTop,
+              splashIconSize: 2000,
+              backgroundColor: HexColor('#0000FF'),),
+          );
         }
-      }
-      else{
-        widget = const OnBoardingScreen();
-      }
       runApp(MyApp(isDark:isDark,startWidget:widget));
     },
     blocObserver: MyBlocObserver(),

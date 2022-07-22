@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/cubit.dart';
 import 'package:xai_pneumonia_detect/modules/login/cubit/states.dart';
-import 'package:xai_pneumonia_detect/modules/main_screen/main_screen.dart';
 import '../../network/local/cache_helper.dart';
 import '../../layout/background.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/components/google_button.dart';
 import '../../shared/components/line.dart';
+import '../pages/patients.dart';
 import '../register/register_screen.dart';
 
 
@@ -28,27 +28,28 @@ class LoginScreen extends StatelessWidget {
       listener: (BuildContext context, state) {
         if(state is LoginErrorState ){
           showToast(
-              text: state.error,
+              text: state.error.toString().replaceRange(0, 14, '').split(']')[1],
               state: ToastStates.ERROR ,
           );
         }
         else if(state is GoogleLoginErrorState){
           showToast(
-            text: state.error,
+            text: state.error.toString().replaceRange(0, 14, '').split(']')[1],
             state: ToastStates.ERROR ,
           );
         }
         if (state is LoginSuccessState)
         {
           CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
-            navigateAndFinish(context,  MainScreen());
+            navigateAndFinish(context,  PatientPage());
             uId = CacheHelper.getData(key: 'uId');
           });
         }
         else if (state is GoogleLoginSuccessState)
         {
           CacheHelper.saveData(key: 'uId', value: state.uId).then((value){
-            navigateAndFinish(context,  MainScreen());
+
+            navigateAndFinish(context,  PatientPage());
             uId = CacheHelper.getData(key: 'uId');
           });
         }
@@ -201,12 +202,16 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: (height)/24,
                     ),
-                    googleButton(
-                        context,
-                        text:'Sign in with Google',
-                      onPressed: (){
-                        LoginCubit.get(context).signInWithGoogle();
-                      }
+                    ConditionalBuilder(
+                      condition: state is !GoogleLoginLoadingState,
+                      fallback:(context)=> const Center(child: CircularProgressIndicator(),),
+                      builder: (context)=>googleButton(
+                          context,
+                          text:'Sign in with Google',
+                        onPressed: (){
+                          LoginCubit.get(context).signInWithGoogle();
+                        }
+                      ),
                     ),
                     SizedBox(
                       height: (height)/40,
